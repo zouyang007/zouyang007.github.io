@@ -1,0 +1,49 @@
+---
+import type { BlogPost } from '../utils/posts';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	posts: BlogPost[];
+	emptyText?: string;
+}
+
+const { posts, emptyText = '这里暂时还没有文章。' } = Astro.props;
+---
+
+{
+	posts.length === 0 ? (
+		<p class="empty">{emptyText}</p>
+	) : (
+		<div class="post-list">
+			{posts.map((post) => (
+				<article>
+					<div class="meta">
+						<FormattedDate date={post.data.pubDate} />
+						<span aria-hidden="true">·</span>
+						<a href={`/categories/${encodeURIComponent(post.data.category)}/`}>{post.data.category}</a>
+					</div>
+					<h2><a href={`/posts/${post.id}/`}>{post.data.title}</a></h2>
+					<p>{post.data.description}</p>
+					<ul aria-label="标签">
+						{post.data.tags.map((tag) => <li><a href={`/tags/${encodeURIComponent(tag)}/`}>#{tag}</a></li>)}
+					</ul>
+				</article>
+			))}
+		</div>
+	)
+}
+
+<style>
+	.post-list { border-top: 1px solid var(--line); }
+	article { padding: 2rem 0; border-bottom: 1px solid var(--line); }
+	.meta { display: flex; gap: 0.55rem; color: var(--muted); font-size: 0.78rem; }
+	.meta a { color: inherit; }
+	h2 { margin: 0.55rem 0 0.7rem; font-size: clamp(1.45rem, 3vw, 2rem); }
+	h2 a { color: var(--ink); text-decoration: none; }
+	h2 a:hover { color: var(--accent); }
+	article > p { max-width: 680px; margin: 0; color: var(--muted); }
+	ul { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+	li a { color: var(--muted); font-size: 0.78rem; text-decoration: none; }
+	li a:hover { color: var(--accent); }
+	.empty { padding: 2rem; border: 1px dashed var(--line); color: var(--muted); text-align: center; }
+</style>

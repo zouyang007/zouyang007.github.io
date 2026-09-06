@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# local unpublished drafts (never push these to a public repository)
+drafts/
+
 # macOS-specific files
 .DS_Store
 

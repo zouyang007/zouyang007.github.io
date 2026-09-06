@@ -1,0 +1,31 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	wide?: boolean;
+}
+
+const { title, description, wide = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main class:list={{ wide }}>
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main.wide { width: min(1120px, calc(100% - 2rem)); }
+</style>

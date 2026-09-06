@@ -1,0 +1,47 @@
+---
+import FormattedDate from '../components/FormattedDate.astro';
+import PageIntro from '../components/PageIntro.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import { SITE_TITLE } from '../consts';
+import { getPublishedPosts, type BlogPost } from '../utils/posts';
+
+const posts = await getPublishedPosts();
+const groups = posts.reduce((years, post) => {
+	const year = String(post.data.pubDate.getFullYear());
+	const entries = years.get(year) ?? [];
+	entries.push(post);
+	years.set(year, entries);
+	return years;
+}, new Map<string, BlogPost[]>());
+---
+
+<PageLayout title={`文章归档 · ${SITE_TITLE}`} description="按年份浏览博客文章。">
+	<PageIntro eyebrow="Archive" title="文章归档" description="按时间回看写过的主题，也看见观点如何慢慢生长。" />
+	<div class="years">
+		{[...groups].map(([year, yearPosts]) => (
+			<section>
+				<h2>{year}</h2>
+				<ol>
+					{yearPosts.map((post) => (
+						<li>
+							<FormattedDate date={post.data.pubDate} />
+							<a href={`/posts/${post.id}/`}>{post.data.title}</a>
+						</li>
+					))}
+				</ol>
+			</section>
+		))}
+	</div>
+</PageLayout>
+
+<style>
+	.years { border-top: 1px solid var(--line); }
+	section { display: grid; grid-template-columns: 100px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--line); }
+	h2 { margin: 0; font-size: 1.45rem; color: var(--accent); }
+	ol { margin: 0; padding: 0; list-style: none; }
+	li { display: grid; grid-template-columns: 140px 1fr; gap: 1rem; padding: 0.6rem 0; }
+	li :global(time) { color: var(--muted); font-size: 0.82rem; }
+	li a { color: var(--ink); text-decoration: none; }
+	li a:hover { color: var(--accent); }
+	@media (max-width: 620px) { section { grid-template-columns: 1fr; gap: 0.5rem; } li { grid-template-columns: 1fr; gap: 0.1rem; } }
+</style>

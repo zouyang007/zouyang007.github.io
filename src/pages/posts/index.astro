@@ -1,0 +1,25 @@
+---
+import PageIntro from '../../components/PageIntro.astro';
+import PostList from '../../components/PostList.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_TITLE } from '../../consts';
+import { getPublishedPosts } from '../../utils/posts';
+
+const posts = await getPublishedPosts();
+---
+
+<PageLayout title={`全部文章 · ${SITE_TITLE}`} description="按发布时间浏览全部已发布文章。">
+	<PageIntro eyebrow={`${posts.length} 篇公开文章`} title="全部文章" description="按发布时间从近到远排列。也可以从分类、标签或全文搜索开始。" />
+	<nav class="browse" aria-label="其他浏览方式">
+		<a href="/categories">按分类浏览</a>
+		<a href="/tags">按标签浏览</a>
+		<a href="/search">全文搜索</a>
+	</nav>
+	<PostList posts={posts} />
+</PageLayout>
+
+<style>
+	.browse { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: -1rem 0 2.5rem; }
+	.browse a { padding: 0.5rem 0.8rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 0.82rem; text-decoration: none; }
+	.browse a:hover { border-color: var(--accent); color: var(--accent); }
+</style>

@@ -1,0 +1,26 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<PageLayout title={`页面未找到 · ${SITE_TITLE}`} description="请求的页面不存在。">
+	<section class="not-found" data-pagefind-ignore>
+		<p>404</p>
+		<h1>这一页没有留下来。</h1>
+		<div>地址可能写错了，或者文章已经移动。你可以返回首页，或搜索站内文章。</div>
+		<nav>
+			<a class="primary" href="/">返回首页</a>
+			<a href="/search">搜索文章</a>
+		</nav>
+	</section>
+</PageLayout>
+
+<style>
+	.not-found { padding: clamp(3rem, 9vw, 8rem) 0; text-align: center; }
+	p { margin: 0; color: var(--accent); font-weight: 800; letter-spacing: 0.2em; }
+	h1 { margin: 0.6rem 0 1rem; }
+	div { max-width: 560px; margin: 0 auto; color: var(--muted); }
+	nav { display: flex; justify-content: center; gap: 0.8rem; margin-top: 2rem; }
+	nav a { padding: 0.7rem 1rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); text-decoration: none; }
+	nav a.primary { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+</style>

@@ -1,0 +1,23 @@
+---
+import PageIntro from '../../components/PageIntro.astro';
+import PostList from '../../components/PostList.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_TITLE } from '../../consts';
+import { getCategories, getPublishedPosts, type BlogPost } from '../../utils/posts';
+
+export async function getStaticPaths() {
+	const posts = await getPublishedPosts();
+	return getCategories(posts).map((category) => ({
+		params: { category },
+		props: { category, posts: posts.filter((post) => post.data.category === category) },
+	}));
+}
+
+interface Props { category: string; posts: BlogPost[]; }
+const { category, posts } = Astro.props;
+---
+
+<PageLayout title={`${category} · ${SITE_TITLE}`} description={`分类“${category}”下的全部文章。`}>
+	<PageIntro eyebrow="Category" title={category} description={`共 ${posts.length} 篇文章。`} />
+	<PostList posts={posts} />
+</PageLayout>

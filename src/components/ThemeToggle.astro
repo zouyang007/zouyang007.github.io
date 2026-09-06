@@ -1,0 +1,35 @@
+<button type="button" aria-label="切换深浅色主题" title="切换深浅色主题">
+	<span class="sun" aria-hidden="true">☼</span>
+	<span class="moon" aria-hidden="true">◐</span>
+</button>
+
+<script is:inline>
+	const button = document.currentScript?.previousElementSibling;
+	button?.addEventListener('click', () => {
+		const root = document.documentElement;
+		const current = root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+		const next = current === 'dark' ? 'light' : 'dark';
+		root.dataset.theme = next;
+		try { localStorage.setItem('theme', next); } catch {}
+	});
+</script>
+
+<style>
+	button {
+		display: grid;
+		width: 2.15rem;
+		height: 2.15rem;
+		margin-left: 0.3rem;
+		place-items: center;
+		border: 1px solid var(--line);
+		border-radius: 50%;
+		background: transparent;
+		color: var(--ink);
+		cursor: pointer;
+		font-size: 1.05rem;
+	}
+	button:hover { border-color: var(--accent); color: var(--accent); }
+	.moon { display: none; }
+	:global([data-theme='dark']) .sun { display: none; }
+	:global([data-theme='dark']) .moon { display: inline; }
+</style>

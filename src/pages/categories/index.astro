@@ -1,0 +1,15 @@
+---
+import PageIntro from '../../components/PageIntro.astro';
+import TermCloud from '../../components/TermCloud.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_TITLE } from '../../consts';
+import { getCategories, getPublishedPosts } from '../../utils/posts';
+
+const posts = await getPublishedPosts();
+const items = getCategories(posts).map((name) => ({ name, count: posts.filter((post) => post.data.category === name).length }));
+---
+
+<PageLayout title={`文章分类 · ${SITE_TITLE}`} description="按照稳定主题浏览博客文章。">
+	<PageIntro eyebrow="Categories" title="文章分类" description="分类保持少而稳定，用来描述一篇文章最主要的主题。" />
+	<TermCloud items={items} basePath="/categories" />
+</PageLayout>

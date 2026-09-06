@@ -1,0 +1,23 @@
+---
+import PageIntro from '../../components/PageIntro.astro';
+import PostList from '../../components/PostList.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE_TITLE } from '../../consts';
+import { getPublishedPosts, getTags, type BlogPost } from '../../utils/posts';
+
+export async function getStaticPaths() {
+	const posts = await getPublishedPosts();
+	return getTags(posts).map((tag) => ({
+		params: { tag },
+		props: { tag, posts: posts.filter((post) => post.data.tags.includes(tag)) },
+	}));
+}
+
+interface Props { tag: string; posts: BlogPost[]; }
+const { tag, posts } = Astro.props;
+---
+
+<PageLayout title={`#${tag} · ${SITE_TITLE}`} description={`标签“${tag}”下的全部文章。`}>
+	<PageIntro eyebrow="Tag" title={`#${tag}`} description={`共 ${posts.length} 篇文章。`} />
+	<PostList posts={posts} />
+</PageLayout>
