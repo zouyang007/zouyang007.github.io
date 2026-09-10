@@ -1,5 +1,5 @@
 ---
-title: 'AI 新闻速递 · 2026-09-04'
+title: 'GPT-6 Astra 正式发布｜AI 新闻速递 · 2026-09-04'
 description: '2026-09-04 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-09-04
 category: 'AI新闻速递'

@@ -1,5 +1,5 @@
 ---
-title: 'AI 领域每日快讯 · 2026-09-06'
+title: 'Astra 全量开放与 AGI 争议｜AI 新闻速递 · 2026-09-06'
 description: '2026-09-06 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-09-06
 category: 'AI新闻速递'

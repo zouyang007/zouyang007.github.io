@@ -1,5 +1,5 @@
 ---
-title: 'AI 新闻速递 · 2026-08-30'
+title: 'DALL·E 退场与 AI 版权诉讼｜AI 新闻速递 · 2026-08-30'
 description: '2026-08-30 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-08-30
 category: 'AI新闻速递'

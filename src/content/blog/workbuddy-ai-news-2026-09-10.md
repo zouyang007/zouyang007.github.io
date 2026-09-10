@@ -1,5 +1,5 @@
 ---
-title: 'AI 领域每日快讯 · 2026-09-10'
+title: 'Anthropic 离职风波引发安全争论｜AI 新闻速递 · 2026-09-10'
 description: '2026-09-10 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-09-10
 category: 'AI新闻速递'
