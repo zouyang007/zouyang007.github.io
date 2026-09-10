@@ -3,7 +3,7 @@ title: '国产大模型密集开源｜AI 新闻速递 · 2026-08-29'
 description: '2026-08-29 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-08-29
 category: 'AI新闻速递'
-tags: ['AI', '新闻', 'WorkBuddy']
+tags: ['AI', '新闻']
 draft: false
 ---
 

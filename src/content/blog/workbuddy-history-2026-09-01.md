@@ -3,7 +3,7 @@ title: '73 年的悬案：泰坦尼克号残骸的发现'
 description: '2026-09-01 历史事件、时代背景与影响梳理。'
 pubDate: 2026-09-01
 category: '历史上的今天'
-tags: ['历史', '科技史', 'WorkBuddy']
+tags: ['历史', '科技史']
 draft: false
 ---
 

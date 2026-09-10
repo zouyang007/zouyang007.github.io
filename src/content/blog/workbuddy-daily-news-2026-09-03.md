@@ -3,7 +3,7 @@ title: '美伊冲突与跨境灾害升级｜每日新闻早报 · 2026-09-03'
 description: '2026-09-03 国内外重要新闻动态分类整理。'
 pubDate: 2026-09-03
 category: '每日新闻早报'
-tags: ['新闻', '每日早报', 'WorkBuddy']
+tags: ['新闻', '每日早报']
 draft: false
 ---
 

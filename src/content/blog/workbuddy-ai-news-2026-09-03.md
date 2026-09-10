@@ -3,7 +3,7 @@ title: '全球头部模型密集上新｜AI 新闻速递 · 2026-09-03'
 description: '2026-09-03 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-09-03
 category: 'AI新闻速递'
-tags: ['AI', '新闻', 'WorkBuddy']
+tags: ['AI', '新闻']
 draft: false
 ---
 

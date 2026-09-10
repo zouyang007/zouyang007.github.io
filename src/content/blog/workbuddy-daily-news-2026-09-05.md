@@ -3,7 +3,7 @@ title: '美国非农超预期牵动加息｜每日新闻早报 · 2026-09-05'
 description: '2026-09-05 国内外重要新闻动态分类整理。'
 pubDate: 2026-09-05
 category: '每日新闻早报'
-tags: ['新闻', '每日早报', 'WorkBuddy']
+tags: ['新闻', '每日早报']
 draft: false
 ---
 

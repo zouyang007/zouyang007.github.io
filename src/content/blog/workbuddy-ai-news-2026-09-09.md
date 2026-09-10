@@ -3,7 +3,7 @@ title: 'AI 挑战千禧年数学难题｜AI 新闻速递 · 2026-09-09'
 description: '2026-09-09 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-09-09
 category: 'AI新闻速递'
-tags: ['AI', '新闻', 'WorkBuddy']
+tags: ['AI', '新闻']
 draft: false
 ---
 

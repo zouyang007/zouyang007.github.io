@@ -3,7 +3,7 @@ title: '吉隆泥石流救援部署｜每日新闻早报 · 2026-08-29'
 description: '2026-08-29 国内外重要新闻动态分类整理。'
 pubDate: 2026-08-29
 category: '每日新闻早报'
-tags: ['新闻', '每日早报', 'WorkBuddy']
+tags: ['新闻', '每日早报']
 draft: false
 ---
 

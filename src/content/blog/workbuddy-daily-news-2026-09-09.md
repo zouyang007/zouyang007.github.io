@@ -3,7 +3,7 @@ title: '外贸高增长与中东战事升级｜每日新闻早报 · 2026-09-09'
 description: '2026-09-09 国内外重要新闻动态分类整理。'
 pubDate: 2026-09-09
 category: '每日新闻早报'
-tags: ['新闻', '每日早报', 'WorkBuddy']
+tags: ['新闻', '每日早报']
 draft: false
 ---
 

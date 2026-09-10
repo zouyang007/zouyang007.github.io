@@ -3,7 +3,7 @@ title: '国产模型与算力继续突破｜AI 新闻速递 · 2026-09-07'
 description: '2026-09-07 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-09-07
 category: 'AI新闻速递'
-tags: ['AI', '新闻', 'WorkBuddy']
+tags: ['AI', '新闻']
 draft: false
 ---
 

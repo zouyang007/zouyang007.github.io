@@ -3,7 +3,7 @@ title: '董建华逝世与折叠屏新品发布｜每日新闻早报 · 2026-09-
 description: '2026-09-10 国内外重要新闻动态分类整理。'
 pubDate: 2026-09-10
 category: '每日新闻早报'
-tags: ['新闻', '每日早报', 'WorkBuddy']
+tags: ['新闻', '每日早报']
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: '智能体安全事件与欧盟监管｜AI 新闻速递 · 2026-09-01'
 description: '2026-09-01 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-09-01
 category: 'AI新闻速递'
-tags: ['AI', '新闻', 'WorkBuddy']
+tags: ['AI', '新闻']
 draft: false
 ---
 

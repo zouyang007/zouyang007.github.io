@@ -3,7 +3,7 @@ title: '金融 AI 监管规则落地｜AI 新闻速递 · 2026-08-31'
 description: '2026-08-31 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-08-31
 category: 'AI新闻速递'
-tags: ['AI', '新闻', 'WorkBuddy']
+tags: ['AI', '新闻']
 draft: false
 ---
 

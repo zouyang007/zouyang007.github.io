@@ -3,7 +3,7 @@ title: '9月7日 · 一条直线，开启电视时代——21岁的法恩斯沃�
 description: '2026-09-07 历史事件、时代背景与影响梳理。'
 pubDate: 2026-09-07
 category: '历史上的今天'
-tags: ['历史', '科技史', 'WorkBuddy']
+tags: ['历史', '科技史']
 draft: false
 ---
 

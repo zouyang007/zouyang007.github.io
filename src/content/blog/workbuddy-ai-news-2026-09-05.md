@@ -3,7 +3,7 @@ title: 'Astra 亮相与具身智能升温｜AI 新闻速递 · 2026-09-05'
 description: '2026-09-05 AI 领域重要动态与信息来源整理。'
 pubDate: 2026-09-05
 category: 'AI新闻速递'
-tags: ['AI', '新闻', 'WorkBuddy']
+tags: ['AI', '新闻']
 draft: false
 ---
 
