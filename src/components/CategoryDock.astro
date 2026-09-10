@@ -1,0 +1,208 @@
+---
+import { getCategories, getPublishedPosts } from '../utils/posts';
+
+const posts = await getPublishedPosts();
+const categories = getCategories(posts).map((name) => ({
+	name,
+	count: posts.filter((post) => post.data.category === name).length,
+}));
+---
+
+<aside class="category-dock" data-category-dock data-pagefind-ignore aria-label="文章分类快捷导航">
+	<div class="category-panel" id="category-drawer">
+		<div class="panel-heading">
+			<p>Browse by topic</p>
+			<h2>文章分类</h2>
+		</div>
+		<ul>
+			{categories.map(({ name, count }) => (
+				<li>
+					<a href={`/categories/${encodeURIComponent(name)}/`}>
+						<span>{name}</span>
+						<small aria-label={`${count} 篇文章`}>{count}</small>
+					</a>
+				</li>
+			))}
+		</ul>
+		<a class="all-categories" href="/categories/">查看全部分类</a>
+	</div>
+	<button
+		class="category-tab"
+		type="button"
+		aria-controls="category-drawer"
+		aria-expanded="false"
+	>
+		<span>文章分类</span>
+	</button>
+</aside>
+
+<script>
+	for (const dock of document.querySelectorAll<HTMLElement>('[data-category-dock]')) {
+		const button = dock.querySelector<HTMLButtonElement>('.category-tab');
+		if (!button) continue;
+
+		const setOpen = (open: boolean) => {
+			dock.classList.toggle('is-open', open);
+			button.setAttribute('aria-expanded', String(open));
+		};
+
+		dock.addEventListener('mouseenter', () => setOpen(true));
+		dock.addEventListener('mouseleave', () => {
+			if (!dock.contains(document.activeElement)) setOpen(false);
+		});
+		dock.addEventListener('focusin', () => setOpen(true));
+		dock.addEventListener('focusout', (event) => {
+			if (!dock.contains(event.relatedTarget as Node | null)) setOpen(false);
+		});
+		button.addEventListener('click', () => setOpen(!dock.classList.contains('is-open')));
+		document.addEventListener('pointerdown', (event) => {
+			if (!dock.contains(event.target as Node)) setOpen(false);
+		});
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape') {
+				setOpen(false);
+				button.blur();
+			}
+		});
+	}
+</script>
+
+<style>
+	.category-dock {
+		position: fixed;
+		top: 50%;
+		left: 0;
+		z-index: 30;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 3.2rem;
+		width: min(19rem, calc(100vw - 1rem));
+		max-height: min(75vh, 38rem);
+		transform: translate(calc(-100% + 3.2rem), -50%);
+		transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+		filter: drop-shadow(0 16px 28px color-mix(in srgb, var(--ink) 14%, transparent));
+	}
+
+	.category-dock:hover,
+	.category-dock:focus-within,
+	.category-dock.is-open {
+		transform: translate(0, -50%);
+	}
+
+	.category-panel {
+		min-width: 0;
+		max-height: min(75vh, 38rem);
+		padding: 1.35rem 1.15rem 1.1rem;
+		overflow-y: auto;
+		border: 1px solid var(--line);
+		border-left: 0;
+		border-radius: 0 0 8px 0;
+		background: color-mix(in srgb, var(--paper) 96%, transparent);
+		backdrop-filter: blur(16px);
+	}
+
+	.panel-heading {
+		padding: 0 0.3rem 0.9rem;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.panel-heading p {
+		margin: 0 0 0.25rem;
+		color: var(--accent);
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+
+	.panel-heading h2 {
+		margin: 0;
+		font-size: 1.45rem;
+		letter-spacing: 0.02em;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0.7rem 0;
+		list-style: none;
+	}
+
+	li + li { border-top: 1px solid color-mix(in srgb, var(--line) 65%, transparent); }
+
+	li a {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.72rem 0.3rem;
+		color: var(--ink);
+		font-family: var(--font-serif);
+		font-size: 0.95rem;
+		line-height: 1.4;
+		text-decoration: none;
+	}
+
+	li a:hover span { color: var(--accent); }
+
+	li small {
+		display: grid;
+		flex: 0 0 1.8rem;
+		width: 1.8rem;
+		height: 1.8rem;
+		place-items: center;
+		border: 1px solid var(--line);
+		border-radius: 50%;
+		color: var(--muted);
+		font-family: var(--font-sans);
+		font-size: 0.72rem;
+	}
+
+	.all-categories {
+		display: inline-block;
+		margin: 0.2rem 0.3rem 0;
+		color: var(--muted);
+		font-size: 0.82rem;
+		text-underline-offset: 0.25em;
+	}
+
+	.category-tab {
+		align-self: start;
+		min-height: 9.5rem;
+		padding: 1rem 0.7rem;
+		border: 0;
+		border-radius: 0 8px 8px 0;
+		background: var(--accent);
+		color: white;
+		cursor: pointer;
+		font-family: var(--font-serif);
+		font-size: 0.9rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		line-height: 1;
+		writing-mode: vertical-rl;
+	}
+
+	.category-tab:hover { background: var(--ink); }
+
+	@media (max-width: 720px) {
+		.category-dock {
+			top: auto;
+			bottom: 1rem;
+			width: min(18rem, calc(100vw - 0.75rem));
+			max-height: min(70vh, 32rem);
+			transform: translateX(calc(-100% + 3.2rem));
+		}
+
+		.category-dock:hover,
+		.category-dock:focus-within,
+		.category-dock.is-open {
+			transform: translateX(0);
+		}
+
+		.category-panel { max-height: min(70vh, 32rem); }
+		.category-tab { min-height: 8.5rem; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.category-dock { transition: none; }
+	}
+</style>
