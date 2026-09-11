@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import CategoryDock from '../components/CategoryDock.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import LibraryScene from '../components/LibraryScene.astro';
+import CultivationLibrary from '../components/CultivationLibrary.astro';
 import UiCustomizer from '../components/UiCustomizer.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getPublishedPosts } from '../utils/posts';
@@ -12,7 +12,7 @@ const posts = await getPublishedPosts();
 ---
 
 <!doctype html>
-<html lang="zh-CN" data-ui-scifi-theme="starship" data-theme="dark">
+<html lang="zh-CN" data-site-skin="cultivation" data-theme="dark">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
@@ -21,13 +21,12 @@ const posts = await getPublishedPosts();
 		<CategoryDock />
 		<UiCustomizer />
 		<main class="home-shell">
-			<LibraryScene posts={posts} />
+			<CultivationLibrary posts={posts} />
 		</main>
 		<Footer />
 	</body>
 </html>
 
 <style>
-	.home-shell { width: min(1480px, calc(100% - 2rem)); padding: 2rem 0; }
-	@media (max-width: 720px) { .home-shell { width: min(100% - 1rem, 1480px); padding-top: 1rem; } }
+	.home-shell { width: 100%; padding: 0; }
 </style>

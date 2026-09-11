@@ -468,8 +468,10 @@
 		},
 	};
 
-	const storageKey = 'personal-blog-ui-preview-v4';
-	const freeStorageKey = 'personal-blog-ui-free-preview-v4';
+	const cultivationSkin = document.documentElement.dataset.siteSkin === 'cultivation';
+	const skinDefaults: UiSettings = cultivationSkin ? { ...defaults, accent: '#c5aa74', fontStyle: 'classic' } : defaults;
+	const storageKey = cultivationSkin ? 'personal-blog-ui-cultivation-v1' : 'personal-blog-ui-preview-v4';
+	const freeStorageKey = cultivationSkin ? 'personal-blog-ui-free-cultivation-v1' : 'personal-blog-ui-free-preview-v4';
 	const panel = document.querySelector<HTMLElement>('[data-ui-editor-panel]');
 	const launcher = document.querySelector<HTMLButtonElement>('[data-ui-editor-launcher]');
 	const status = document.querySelector<HTMLElement>('[data-ui-editor-status]');
@@ -486,7 +488,7 @@
 		if (launcher) launcher.hidden = false;
 		if (panel) panel.hidden = false;
 	}
-	let settings: UiSettings = { ...defaults };
+	let settings: UiSettings = { ...skinDefaults };
 	let freeRules: Record<string, FreeRule> = {};
 	let freeMode = false;
 	let selectedElement: HTMLElement | null = null;
@@ -502,7 +504,7 @@
 		const saved = localStorage.getItem(storageKey);
 		if (saved) {
 			const parsed = JSON.parse(saved);
-			settings = { ...defaults, ...parsed };
+			settings = { ...skinDefaults, ...parsed };
 			if (!parsed.themeMode) {
 				const savedTheme = localStorage.getItem('theme');
 				if (savedTheme === 'light' || savedTheme === 'dark') settings.themeMode = savedTheme;
@@ -798,7 +800,8 @@
 
 	function applySettings() {
 		const root = document.documentElement;
-		root.dataset.uiScifiTheme = settings.sciFiTheme;
+		if (cultivationSkin) delete root.dataset.uiScifiTheme;
+		else root.dataset.uiScifiTheme = settings.sciFiTheme;
 		root.style.setProperty('--accent', settings.accent);
 		root.style.setProperty('--ui-body-size', `${settings.fontSize}px`);
 		root.style.setProperty('--ui-reading-width', `${settings.readingWidth}px`);

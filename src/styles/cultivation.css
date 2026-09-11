@@ -1,0 +1,52 @@
+/* One shared visual language for every page of the archive. */
+html:root[data-site-skin='cultivation'] {
+ --paper:#101c17; --paper-deep:#19271f; --ink:#eee5d1; --muted:#afbcad;
+ --accent:#c5aa74; --line:rgba(185,159,106,.28); --archive-surface:#19251d;
+ --archive-wood:#51402b; color-scheme:dark;
+}
+html:root[data-site-skin='cultivation'][data-theme='light'] {
+ --paper:#ede5d3; --paper-deep:#e3d7bd; --ink:#2c3529; --muted:#61674f;
+ --line:rgba(95,81,49,.25); --archive-surface:#f3ead7; --archive-wood:#b39a70; color-scheme:light;
+}
+html[data-site-skin='cultivation'] body { background:var(--paper); }
+html[data-site-skin='cultivation'] body::before { display:none; }
+html[data-site-skin='cultivation'] main { perspective:none; }
+html[data-site-skin='cultivation'] body > header { background:color-mix(in srgb,var(--paper) 96%,transparent); box-shadow:0 3px 15px #0001; border-bottom:1px solid var(--line); }
+html[data-site-skin='cultivation'] .brand-mark { border-radius:3px; background:#80513b; box-shadow:none; color:#f5e6c8; }
+html[data-site-skin='cultivation'] h1,
+html[data-site-skin='cultivation'] h2,
+html[data-site-skin='cultivation'] h3 { text-shadow:none; }
+html[data-site-skin='cultivation'] .page-intro { padding:0 0 2rem; border-bottom:1px solid var(--line); }
+html[data-site-skin='cultivation'] .page-intro h1 { font-weight:500; letter-spacing:.07em; }
+html[data-site-skin='cultivation'] .page-intro > p { letter-spacing:.2em; }
+html[data-site-skin='cultivation'] .post-list { border:0; }
+html[data-site-skin='cultivation'] .post-list article { margin-bottom:1.25rem; padding:clamp(1.1rem,3vw,2rem); background:var(--archive-surface); border:1px solid var(--line); border-left:4px solid var(--archive-wood); box-shadow:0 8px 20px #0001; }
+html[data-site-skin='cultivation'] .post-list .meta { flex-wrap:wrap; }
+html[data-site-skin='cultivation'] .post-list h2 { line-height:1.55; }
+html[data-site-skin='cultivation'] .post-list li a { color:var(--muted); }
+html[data-site-skin='cultivation'] .browse a { border-radius:3px; background:var(--archive-surface); }
+html[data-site-skin='cultivation'] article[data-pagefind-body] { border:1px solid var(--line); border-top:6px solid var(--archive-wood); border-bottom:6px solid var(--archive-wood); background:var(--archive-surface); padding:clamp(1.25rem,4vw,3rem); box-shadow:0 20px 45px #0002; }
+html[data-site-skin='cultivation'] .article-head h1 { font-size:clamp(1.9rem,4.5vw,3.25rem); line-height:1.45; letter-spacing:.025em; font-weight:500; overflow-wrap:anywhere; }
+html[data-site-skin='cultivation'] .article-head { border-bottom:1px solid var(--line); padding-bottom:2rem; }
+html[data-site-skin='cultivation'] .prose { overflow-wrap:anywhere; }
+html[data-site-skin='cultivation'] .prose h2 { font-size:1.65rem; }
+html[data-site-skin='cultivation'] blockquote { padding:1rem 1.25rem; background:var(--paper-deep); border-left:3px solid var(--accent); }
+html[data-site-skin='cultivation'] pre { border:1px solid var(--line); border-radius:3px; }
+html[data-site-skin='cultivation'] .prose table { display:block; overflow-x:auto; }
+html[data-site-skin='cultivation'] .years { border-top:3px solid var(--archive-wood); }
+html[data-site-skin='cultivation'] .years section { padding:1.5rem 1rem; background:var(--archive-surface); }
+html[data-site-skin='cultivation'] .category-panel { border-color:var(--line); background:var(--archive-surface); }
+html[data-site-skin='cultivation'] .category-tab { background:#6a5131; color:#f0dfb9; border:1px solid #ad9160; border-radius:0 3px 3px 0; }
+html[data-site-skin='cultivation'] .category-panel a { border-radius:2px; }
+html[data-site-skin='cultivation'] .term-cloud a { border-top:3px solid var(--archive-wood); background:var(--archive-surface); border-radius:2px; }
+html[data-site-skin='cultivation'] .term-cloud .original-category { display:block; margin-top:.35rem; color:var(--muted); font-size:.8rem; }
+html[data-site-skin='cultivation'] #search { padding:1rem; background:var(--archive-surface); border:1px solid var(--line); border-top:4px solid var(--archive-wood); }
+html[data-site-skin='cultivation'] pagefind-searchbox { --pf-text:var(--ink); --pf-text-secondary:var(--muted); --pf-text-muted:var(--muted); --pf-background:var(--archive-surface); --pf-border:var(--line); --pf-hover:var(--paper-deep); --pf-mark:var(--archive-wood); --pf-border-focus:var(--accent); --pf-outline-focus:var(--accent); --pf-font:var(--font-serif); --pf-searchbox-max-width:100%; --pf-result-title-font-size:1rem; --pf-result-excerpt-font-size:.875rem; --pf-input-font-size:1rem; }
+html[data-site-skin='cultivation'] .not-found nav a { border-radius:3px; }
+html[data-site-skin='cultivation'] .not-found nav a.primary { background:#40543b; color:#f1e5ca; border-color:#8e8055; }
+html[data-site-skin='cultivation'] body > footer { background:var(--paper-deep); border-top:1px solid var(--line); }
+@media(max-width:600px) {
+ html[data-site-skin='cultivation'] article[data-pagefind-body] { padding:1.2rem .85rem; }
+ html[data-site-skin='cultivation'] .post-list article { padding:1.2rem; }
+ html[data-site-skin='cultivation'] .prose { font-size:1rem; }
+}

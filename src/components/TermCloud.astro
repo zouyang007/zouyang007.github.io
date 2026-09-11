@@ -1,4 +1,5 @@
 ---
+import { libraryName } from '../utils/library';
 interface Item {
 	name: string;
 	count: number;
@@ -12,11 +13,11 @@ interface Props {
 const { items, basePath } = Astro.props;
 ---
 
-<ul>
+<ul class="term-cloud">
 	{items.map((item) => (
 		<li>
 			<a href={`${basePath}/${encodeURIComponent(item.name)}/`}>
-				<span>{basePath === '/tags' ? '#' : ''}{item.name}</span>
+				<span>{basePath === '/tags' ? `#${item.name}` : libraryName(item.name)}{basePath === '/categories' && <span class="original-category">{item.name}</span>}</span>
 				<small>{item.count} 篇</small>
 			</a>
 		</li>

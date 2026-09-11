@@ -1,5 +1,6 @@
 ---
 import { getCategories, getPublishedPosts } from '../utils/posts';
+import { libraryName } from '../utils/library';
 
 const posts = await getPublishedPosts();
 const categories = getCategories(posts).map((name) => ({
@@ -11,14 +12,14 @@ const categories = getCategories(posts).map((name) => ({
 <aside class="category-dock" data-category-dock data-pagefind-ignore aria-label="文章分类快捷导航">
 	<div class="category-panel" id="category-drawer">
 		<div class="panel-heading">
-			<p>Browse by topic</p>
-			<h2>文章分类</h2>
+			<p>分阁寻卷</p>
+			<h2>藏书门类</h2>
 		</div>
 		<ul>
 			{categories.map(({ name, count }) => (
 				<li>
 					<a href={`/categories/${encodeURIComponent(name)}/`}>
-						<span>{name}</span>
+						<span>{libraryName(name)}<small style="display:block;margin-top:.3rem">{name}</small></span>
 						<small aria-label={`${count} 篇文章`}>{count}</small>
 					</a>
 				</li>

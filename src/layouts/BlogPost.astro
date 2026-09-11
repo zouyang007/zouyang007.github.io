@@ -7,13 +7,14 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import UiCustomizer from '../components/UiCustomizer.astro';
+import { libraryName } from '../utils/library';
 
 type Props = CollectionEntry<'blog'>['data'];
 const { title, description, pubDate, updatedDate, heroImage, category, tags } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="zh-CN" data-ui-scifi-theme="starship" data-theme="dark">
+<html lang="zh-CN" data-site-skin="cultivation" data-theme="dark">
 	<head>
 		<BaseHead
 			title={`${title}`}
@@ -31,7 +32,7 @@ const { title, description, pubDate, updatedDate, heroImage, category, tags } = 
 		<main>
 			<article data-pagefind-body>
 				<header class="article-head">
-					<a class="category" href={`/categories/${encodeURIComponent(category)}/`}>{category}</a>
+					<a class="category" href={`/categories/${encodeURIComponent(category)}/`}>{libraryName(category)} · {category}</a>
 					<h1 data-pagefind-meta="title">{title}</h1>
 					<p class="description">{description}</p>
 					<div class="meta">

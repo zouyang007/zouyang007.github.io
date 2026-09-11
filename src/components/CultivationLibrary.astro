@@ -1,0 +1,195 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { posts: CollectionEntry<'blog'>[] }
+const { posts } = Astro.props;
+const names: Record<string, {name: string; note: string; tone: string}> = {
+ '历史上的今天': { name: '大陆纪要', note: '朝代兴替，岁月留痕', tone: 'ochre' },
+ '每日新闻早报': { name: '万界见闻', note: '四海风物，人间新事', tone: 'jade' },
+ 'AI新闻速递': { name: '天机秘录', note: '推演万象，窥见未来', tone: 'indigo' },
+ 'GitHub高分项目': { name: '百工造物', note: '奇巧之术，开源之器', tone: 'red' },
+};
+const categories = [...new Set(posts.map(post => post.data.category))];
+const ordered = [...Object.keys(names).filter(category => categories.includes(category)), ...categories.filter(category => !names[category])];
+const shelves = ordered.map((category, index) => ({
+ category, id: `collection-${index + 1}`, ...(names[category] ?? {name: `${category}阁`, note: '拾遗录事，收纳新知', tone: 'ochre'}),
+ posts: posts.filter(post => post.data.category === category),
+}));
+const formatDate = (date: Date) => new Intl.DateTimeFormat('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
+---
+
+<div class="cultivation-library" data-cultivation-library>
+ <section class="pavilion" data-pavilion aria-labelledby="pavilion-title">
+  <img class="pavilion-art" src="/images/immortal-library.webp" width="1536" height="1024" alt="云山之间的三层藏书阁，飞檐下灯火温暖，中央石阶通向木制大门" fetchpriority="high" />
+  <div class="pavilion-shade" aria-hidden="true"></div>
+  <div class="pavilion-heading"><p>未名手记 · 山中一阁</p><h1 id="pavilion-title">藏书阁</h1><span>收天下见闻 · 藏万卷新知</span></div>
+  <a class="pavilion-door" href="#shelves" data-enter-library aria-label="推门入阁，浏览分类书架"><span>推门入阁</span><small>叩门 · 阅卷</small></a>
+  <div class="pavilion-caption"><span>{shelves.length} 座书架 · {posts.length} 卷藏书</span><p>择一卷书，入一方天地。</p><a href="/posts/">直接浏览全部文章 →</a></div>
+ </section>
+
+ <section class="library-interior" id="shelves" data-library-interior aria-labelledby="interior-title">
+  <header class="interior-heading"><div><p class="eyebrow">云深处 · 藏书阁</p><h2 id="interior-title" tabindex="-1">万卷入阁</h2><p>依门类寻书，轻触书脊即可展卷。</p></div><a href="#" data-leave-library class="quiet-button">返回阁前</a></header>
+  <nav class="collection-nav" aria-label="藏书分类">{shelves.map(shelf => <a href={`#${shelf.id}`}><span>{shelf.name}</span><small>{shelf.posts.length} 卷</small></a>)}</nav>
+  <div class="shelf-gallery">{shelves.map((shelf, shelfIndex) => (
+   <section class:list={['archive-cabinet', shelf.tone]} id={shelf.id} aria-labelledby={`${shelf.id}-title`} data-category-shelf data-category={shelf.category}>
+    <header class="cabinet-heading"><span class="cabinet-number">{['壹','贰','叁','肆'][shelfIndex] ?? String(shelfIndex + 1)}</span><div><h3 id={`${shelf.id}-title`}>{shelf.name}</h3><p>{shelf.category} · {shelf.note}</p></div><span class="volume-count">{shelf.posts.length} 卷</span></header>
+    <div class="shelf-books">{shelf.posts.map((post, index) => (
+     <div class="book-slot">
+      <a class="ancient-book" href={`/posts/${post.id}/`} data-library-book data-title={post.data.title} data-description={post.data.description} data-category={post.data.category} data-collection={shelf.name} data-keywords={post.data.tags.join(' · ') || post.data.category} data-date={formatDate(post.data.pubDate)} aria-label={`展卷：${post.data.title}`} aria-describedby="book-keyword-tooltip" style={`--volume-height:${146 + (index % 4) * 8}px;--lean:${(index % 3 - 1) * 1.5}deg`}>
+       <span class="volume-visual"><span class="thread-binding" aria-hidden="true">┄<br/>┄<br/>┄</span><span class="volume-label">{post.data.title.slice(0, 16)}{post.data.title.length > 16 ? '…' : ''}</span><span class="volume-index">{String(index + 1).padStart(2, '0')}</span></span>
+      </a>
+     </div>
+    ))}</div>
+    <footer class="cabinet-footer"><span>{shelf.name} · 藏</span><a href={`/categories/${encodeURIComponent(shelf.category)}/`}>查看本门全部文章 →</a></footer>
+   </section>
+  ))}</div>
+  {posts.length === 0 && <p class="empty-library">阁中暂未收录典籍，待来日添卷。</p>}
+ </section>
+
+ <div class="keyword-tooltip" id="book-keyword-tooltip" data-book-tooltip role="tooltip" hidden><strong data-tooltip-title></strong><span data-tooltip-category></span><p data-tooltip-keywords></p></div>
+ <dialog class="scroll-dialog" data-book-presentation aria-labelledby="scroll-title">
+  <button type="button" data-close-presentation class="close-scroll" aria-label="合上书卷">×</button>
+  <p class="eyebrow" data-presented-collection></p><span class="scroll-seal" aria-hidden="true">藏</span>
+  <h2 id="scroll-title" data-presented-title></h2>
+  <p class="scroll-meta"><span data-presented-category></span><span data-presented-date></span></p>
+  <div class="scroll-rule" aria-hidden="true"></div><p class="scroll-description" data-presented-description></p>
+  <a class="read-scroll" data-read-article href="/posts/">展开全文 <span aria-hidden="true">→</span></a>
+ </dialog>
+</div>
+
+<script>
+ const root = document.querySelector<HTMLElement>('[data-cultivation-library]');
+ if (root) {
+  const pavilion = root.querySelector<HTMLElement>('[data-pavilion]')!;
+  const interior = root.querySelector<HTMLElement>('[data-library-interior]')!;
+  const entrance = root.querySelector<HTMLAnchorElement>('[data-enter-library]')!;
+  const dialog = root.querySelector<HTMLDialogElement>('[data-book-presentation]')!;
+  const tooltip = root.querySelector<HTMLElement>('[data-book-tooltip]')!;
+  let opening = false;
+  const syncRoom = () => {
+   const inside = location.hash === '#shelves' || location.hash.startsWith('#collection-');
+   pavilion.hidden = inside; interior.hidden = !inside;
+  };
+  syncRoom();
+  window.addEventListener('hashchange', syncRoom);
+  entrance.addEventListener('click', (event) => {
+   event.preventDefault(); if (opening) return; opening = true;
+   pavilion.classList.add('is-opening');
+   window.setTimeout(() => {
+    location.hash = 'shelves'; syncRoom();
+    interior.querySelector<HTMLElement>('h2')?.focus({preventScroll:true});
+    window.scrollTo({top:0,behavior:'instant'});
+    pavilion.classList.remove('is-opening'); opening = false;
+   }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650);
+  });
+  root.querySelector('[data-leave-library]')?.addEventListener('click', () => {
+   tooltip.hidden = true;
+   window.setTimeout(() => { entrance.focus({preventScroll:true}); window.scrollTo({top:0,behavior:'instant'}); }, 0);
+  });
+  const positionTooltip = (x: number, y: number) => {
+   const bounds = tooltip.getBoundingClientRect();
+   tooltip.style.left = `${Math.max(10, Math.min(x + 14, innerWidth - bounds.width - 10))}px`;
+   tooltip.style.top = `${Math.max(10, Math.min(y + 18, innerHeight - bounds.height - 10))}px`;
+  };
+  for (const book of root.querySelectorAll<HTMLAnchorElement>('[data-library-book]')) {
+   const show = (x?: number, y?: number) => {
+    tooltip.querySelector('[data-tooltip-title]')!.textContent = book.dataset.title ?? '';
+    tooltip.querySelector('[data-tooltip-category]')!.textContent = `${book.dataset.collection} · ${book.dataset.category}`;
+    tooltip.querySelector('[data-tooltip-keywords]')!.textContent = `关键词 · ${book.dataset.keywords}`;
+    tooltip.hidden = false; const box = book.getBoundingClientRect(); positionTooltip(x ?? box.right, y ?? box.top);
+   };
+   book.addEventListener('pointerenter', e => {if (e.pointerType !== 'touch') show(e.clientX, e.clientY);});
+   book.addEventListener('pointermove', e => { if (e.pointerType !== 'touch' && !dialog.open) show(e.clientX, e.clientY); });
+   book.addEventListener('pointerleave', () => tooltip.hidden = true);
+   book.addEventListener('focus', () => show());
+   book.addEventListener('blur', () => tooltip.hidden = true);
+   book.addEventListener('click', e => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    e.preventDefault(); tooltip.hidden = true;
+    for (const field of ['title','description','category','date','collection']) {
+     dialog.querySelector(`[data-presented-${field}]`)!.textContent = book.dataset[field] ?? '';
+    }
+    dialog.querySelector<HTMLAnchorElement>('[data-read-article]')!.href = book.href;
+    dialog.showModal();
+   });
+  }
+  root.querySelector('[data-close-presentation]')?.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', e => { if(e.target === dialog) { const r=dialog.getBoundingClientRect(); if(e.clientX<r.left || e.clientX>r.right || e.clientY<r.top || e.clientY>r.bottom) dialog.close(); } });
+  dialog.addEventListener('close', () => tooltip.hidden = true);
+  window.addEventListener('scroll', () => tooltip.hidden = true, {passive:true});
+  window.addEventListener('resize', () => tooltip.hidden = true);
+ }
+</script>
+
+<style>
+ .cultivation-library { --gold:#d7b780; --jade:#91a995; --text:#efe7d5; color:var(--text); font-family:var(--font-serif); }
+ [hidden] { display:none !important; }
+ .pavilion { position:relative; height:calc(100svh - var(--ui-header-height)); min-height:650px; overflow:hidden; background:#142320; --image-height:max(66.6667vw, calc(100svh - var(--ui-header-height)), 650px); }
+ .pavilion-art { width:100%; height:100%; object-fit:cover; object-position:center; border-radius:0; transition:transform 700ms ease, filter 700ms ease; }
+ .pavilion-shade { position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(6,17,17,.52),transparent 28%,transparent 68%,rgba(5,15,14,.92)); }
+ .pavilion-heading { position:absolute; top:3%; left:50%; transform:translateX(-50%); text-align:center; width:90%; text-shadow:0 3px 18px #071512; pointer-events:none; }
+ .pavilion-heading p { margin:0 0 .4rem; font-size:.85rem; letter-spacing:.38em; color:#e7d6b5; }
+ .pavilion-heading h1 { margin:0; font-size:clamp(2.6rem,5.5vw,4.8rem); letter-spacing:.3em; padding-left:.3em; font-weight:500; color:#f4e8ce; }
+ .pavilion-heading > span { display:block; margin-top:.7rem; color:#d2d8cc; font-size:.85rem; letter-spacing:.2em; }
+ .pavilion-door { position:absolute; left:50%; top:calc(50% + var(--image-height) * .129); transform:translate(-50%,-50%); width:calc(var(--image-height) * .15); min-width:110px; height:calc(var(--image-height) * .15); min-height:100px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.4rem; border:1px solid rgba(231,189,107,.45); border-radius:3px; color:#ffedc1; text-decoration:none; background:rgba(26,16,5,.12); box-shadow:inset 0 0 20px #efb55228,0 0 24px #e8c77322; transition:background .25s,box-shadow .25s; }
+ .pavilion-door span { padding:.5rem .65rem; background:#1e160dbb; border:1px solid #b8955d80; letter-spacing:.18em; font-size:1rem; }
+ .pavilion-door small { font-size:.75rem; text-shadow:0 2px 5px #000; }
+ .pavilion-door:hover,.pavilion-door:focus-visible { color:#fff2ce; background:#f2bd5530; box-shadow:inset 0 0 35px #f3c36d55,0 0 42px #e6b64e55; outline:2px solid var(--gold); outline-offset:5px; }
+ .is-opening .pavilion-art { transform:scale(1.15); transform-origin:50% 63%; filter:brightness(1.35); }
+ .is-opening .pavilion-door { opacity:0; }
+ .pavilion-caption { position:absolute; left:0; right:0; bottom:3%; text-align:center; }
+ .pavilion-caption > span { color:#b9c8bb; font-size:.85rem; letter-spacing:.18em; }
+ .pavilion-caption p { margin:.45rem 0; color:#f1e0bf; font-size:1.1rem; letter-spacing:.1em; }
+ .pavilion-caption a { color:#bac5b7; font-size:.85rem; text-underline-offset:5px; }
+ .library-interior { min-height:80vh; max-width:1400px; margin:auto; padding:3rem 2rem 5rem; }
+ .interior-heading { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:2rem; }
+ .eyebrow { margin:0 0 .65rem; color:var(--gold); font-size:.85rem; letter-spacing:.25em; }
+ .interior-heading h2 { margin:0 0 .75rem; font-size:clamp(2.3rem,5vw,3.8rem); color:var(--text); font-weight:500; letter-spacing:.15em; }
+ .interior-heading div > p:last-child { color:#a6b4a8; margin:0; font-size:1rem; }
+ .quiet-button { padding:.6rem 1rem; border:1px solid #a98d584d; color:#d5bd90; text-decoration:none; white-space:nowrap; font-size:.9rem; }
+ .collection-nav { display:flex; flex-wrap:wrap; border-top:1px solid #a98d5840; border-bottom:1px solid #a98d5840; margin-bottom:2.5rem; }
+ .collection-nav a { flex:1 1 150px; display:flex; align-items:center; justify-content:center; gap:1rem; padding:1rem; color:#e0ccb0; text-decoration:none; }
+ .collection-nav a:hover { background:#d7b78012; }
+ .collection-nav small { color:#92a090; font-size:.85rem; }
+ .shelf-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2.3rem; align-items:start; }
+ .archive-cabinet { scroll-margin-top:calc(var(--ui-header-height) + 1.5rem); padding:0 1rem; border:1px solid #97744270; border-left:9px solid #34271d; border-right:9px solid #34271d; background:linear-gradient(90deg,#100f0c,#282219 48%,#13120d); box-shadow:0 22px 40px #0004,inset 0 0 25px #0008; --cover:#60502e; --cover-light:#806b3e; }
+ .archive-cabinet.jade { --cover:#334d3f; --cover-light:#56705a; }
+ .archive-cabinet.indigo { --cover:#34434d; --cover-light:#526877; }
+ .archive-cabinet.red { --cover:#60362c; --cover-light:#7b4c3a; }
+ .cabinet-heading { display:flex; align-items:center; gap:.85rem; min-height:108px; padding:1.2rem .25rem; border-bottom:5px solid #4b3826; }
+ .cabinet-number { padding:.25rem .55rem; border:1px solid #a4865266; color:#b99b66; font-size:1.35rem; }
+ .cabinet-heading h3 { margin:0 0 .3rem; font-size:1.55rem; letter-spacing:.15em; color:#eedab6; font-weight:500; }
+ .cabinet-heading p { margin:0; color:#b5a58b; font-size:.8rem; }
+ .volume-count { margin-left:auto; white-space:nowrap; color:#a89170; font-size:.8rem; }
+ .shelf-books { display:grid; grid-template-columns:repeat(auto-fill,minmax(65px,1fr)); padding:0 .25rem; background:repeating-linear-gradient(to bottom,transparent 0 196px,#473221 196px 208px); }
+ .book-slot { display:flex; align-items:end; justify-content:center; height:208px; padding:18px 6px 12px; border-bottom:12px solid #473221; box-shadow:0 6px 5px #0006; }
+ .ancient-book { position:relative; display:block; width:48px; height:var(--volume-height); color:#27251d; text-decoration:none; touch-action:manipulation; }
+ /* The link stays flat; only its non-interactive cover moves, preserving Edge hit testing. */
+ .volume-visual { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border:1px solid #b59c5c80; border-radius:2px 4px 4px 2px; background:linear-gradient(90deg,#171711 0 9%,var(--cover) 10%,var(--cover-light) 60%,var(--cover)); box-shadow:5px 4px 5px #0008,inset -3px 0 2px #0005; transform:rotate(var(--lean)); transform-origin:bottom; transition:transform 200ms,filter 200ms; pointer-events:none; }
+ .volume-label { writing-mode:vertical-rl; max-height:calc(100% - 28px); overflow:hidden; padding:7px 3px; border:1px solid #8b764d; background:#d8c7a0; font-size:.82rem; line-height:1.2; letter-spacing:.08em; }
+ .thread-binding { position:absolute; left:1px; top:15px; color:#b7a884; font-size:12px; line-height:3; }
+ .volume-index { position:absolute; bottom:2px; right:4px; color:#dccba6; font-size:10px; }
+ .ancient-book:hover .volume-visual,.ancient-book:focus-visible .volume-visual { transform:translateY(-10px) rotate(0); filter:brightness(1.2); }
+ .ancient-book:focus-visible { outline:2px solid var(--gold); outline-offset:6px; }
+ .cabinet-footer { display:flex; justify-content:space-between; gap:1rem; padding:1.2rem .25rem; color:#b39c73; font-size:.8rem; }
+ .cabinet-footer a { color:#cbbb9b; text-underline-offset:4px; }
+ .keyword-tooltip { position:fixed; z-index:100; width:min(320px,calc(100vw - 24px)); padding:1rem; background:#18221ef5; border:1px solid #bba06a80; color:#eee2c9; box-shadow:0 10px 35px #0008; pointer-events:none; }
+ .keyword-tooltip strong { display:block; font-size:1rem; line-height:1.6; }
+ .keyword-tooltip span { display:block; margin:.5rem 0; color:#b5baaa; font-size:.8rem; }
+ .keyword-tooltip p { margin:0; font-size:.85rem; color:#dfc58f; }
+ .scroll-dialog { position:fixed; width:min(650px,calc(100vw - 2rem)); max-height:calc(100svh - 3rem); overflow:auto; padding:clamp(1.8rem,5vw,3.8rem); border:1px solid #b29563; border-top:8px solid #59402a; border-bottom:8px solid #59402a; background:#e8ddc3; color:#302a20; box-shadow:0 25px 90px #0009; }
+ .scroll-dialog::backdrop { background:#06120be0; backdrop-filter:blur(7px); }
+ .scroll-dialog[open] { animation:unroll 300ms ease-out; }
+ .scroll-dialog .eyebrow { color:#776340; }
+ .scroll-dialog h2 { position:relative; margin:1.5rem 0; font-size:clamp(1.5rem,4vw,2.1rem); color:#302a20; line-height:1.5; }
+ .close-scroll { position:absolute; right:.6rem; top:.4rem; width:40px; height:40px; border:0; background:transparent; color:#59432c; font-size:1.7rem; cursor:pointer; }
+ .scroll-seal { position:absolute; right:3rem; top:3rem; border:2px solid #954a37; color:#954a37; padding:.15rem .4rem; opacity:.7; transform:rotate(8deg); }
+ .scroll-meta { display:flex; flex-wrap:wrap; gap:1rem; color:#74664f; font-size:.85rem; }
+ .scroll-rule { height:1px; background:#8e79594d; margin:1.3rem 0; }
+ .scroll-description { line-height:1.9; font-size:1rem; }
+ .read-scroll { display:flex; align-items:center; justify-content:space-between; padding:.85rem 1.2rem; margin-top:1.6rem; background:#2e4639; border:1px solid #53654d; color:#efe3c8; text-decoration:none; }
+ .read-scroll:hover { color:white; background:#3f5847; }
+ @keyframes unroll { from {opacity:0;transform:translateY(12px) scale(.97)} to {opacity:1;transform:none} }
+ @media(max-width:850px) { .shelf-gallery { grid-template-columns:1fr; } .library-interior { padding:2rem 1rem 3rem; } .pavilion { min-height:570px; --image-height:max(66.6667vw,calc(100svh - var(--ui-header-height)),570px); } }
+ @media(max-width:480px) { .pavilion-heading { top:5%; } .pavilion-heading h1 { font-size:3rem; } .pavilion-caption p { font-size:.95rem; } .interior-heading { align-items:start; } .quiet-button { padding:.5rem; font-size:.8rem; } .archive-cabinet { padding:0 .5rem; } .cabinet-heading { gap:.5rem; } .cabinet-heading h3 { font-size:1.35rem; } .cabinet-heading p { font-size:.75rem; } .volume-count { display:none; } .collection-nav a { flex-basis:45%; } }
+ @media(prefers-reduced-motion:reduce) { .pavilion-art,.volume-visual { transition:none; } .scroll-dialog[open] { animation:none; } }
+</style>
