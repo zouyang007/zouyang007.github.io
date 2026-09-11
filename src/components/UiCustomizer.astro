@@ -1,0 +1,1666 @@
+<button
+	type="button"
+	class="ui-editor-launcher"
+	hidden
+	data-ui-editor-launcher
+	aria-label="打开界面控制面板"
+	aria-controls="ui-editor-panel"
+	aria-expanded="false"
+	data-pagefind-ignore
+>
+	<span aria-hidden="true">✦</span>
+	<span>设计</span>
+</button>
+
+<aside
+	id="ui-editor-panel"
+	class="ui-editor-panel"
+	hidden
+	data-ui-editor-panel
+	data-open="false"
+	aria-label="界面控制面板"
+	data-pagefind-ignore
+>
+	<header class="editor-head">
+		<div>
+			<p>LIVE PREVIEW</p>
+			<h2>界面控制面板</h2>
+		</div>
+		<button type="button" class="icon-button" data-ui-editor-close aria-label="收起控制面板">×</button>
+	</header>
+
+	<div class="editor-note">
+		<span aria-hidden="true">●</span>
+		<p><strong>仅本机预览</strong>调整会立即显示，但不会直接改变线上博客。</p>
+	</div>
+
+	<section class="editor-section free-editor" aria-labelledby="free-title">
+		<div class="section-title">
+			<h3 id="free-title">自由编辑</h3>
+			<span data-ui-free-state>尚未开启</span>
+		</div>
+
+		<button type="button" class="free-mode-button" data-ui-free-toggle aria-pressed="false">
+			<span aria-hidden="true">⌖</span>
+			<strong>开启点选编辑</strong>
+		</button>
+		<p class="free-help">开启后，直接点击页面上的标题、文字、卡片或区域，再在这里单独修改。</p>
+
+		<div class="free-history-actions" aria-label="自由编辑历史">
+			<button type="button" data-ui-free-undo disabled>撤销</button>
+			<button type="button" data-ui-free-redo disabled>重做</button>
+			<button type="button" data-ui-free-reset-all>清空自由调整</button>
+		</div>
+
+		<div class="free-selection" data-ui-free-selection>
+			<strong>尚未选择元素</strong>
+			<span>开启点选编辑后，从页面中选择想修改的内容。</span>
+		</div>
+
+		<fieldset class="free-controls" data-ui-free-controls disabled>
+			<div class="free-text-field" data-ui-free-text-field hidden>
+				<label for="ui-free-text">文字内容</label>
+				<textarea id="ui-free-text" rows="3" data-ui-free-text></textarea>
+			</div>
+
+			<details class="free-control-group" open>
+				<summary>文字与颜色</summary>
+				<div class="free-control-body">
+					<label class="color-field">
+						<span>文字颜色</span>
+						<span class="color-control"><input type="color" value="#1f2328" data-ui-free-control="color" aria-label="选择文字颜色" /><output data-ui-free-output="color">#1F2328</output></span>
+					</label>
+
+					<label class="range-field">
+						<span class="range-head"><span>文字大小</span><output data-ui-free-output="fontSize">17px</output></span>
+						<input type="range" min="12" max="80" step="1" value="17" data-ui-free-control="fontSize" />
+					</label>
+
+					<label class="select-field">
+						<span>文字粗细</span>
+						<select data-ui-free-control="fontWeight">
+							<option value="300">纤细</option>
+							<option value="400">常规</option>
+							<option value="500">中等</option>
+							<option value="600">半粗</option>
+							<option value="700">粗体</option>
+							<option value="800">特粗</option>
+							<option value="900">黑体</option>
+						</select>
+					</label>
+
+					<label class="select-field">
+						<span>文字对齐</span>
+						<select data-ui-free-control="textAlign">
+							<option value="left">左对齐</option>
+							<option value="center">居中</option>
+							<option value="right">右对齐</option>
+						</select>
+					</label>
+				</div>
+			</details>
+
+			<details class="free-control-group">
+				<summary>背景与边框</summary>
+				<div class="free-control-body">
+					<label class="select-field">
+						<span>背景处理</span>
+						<select data-ui-free-control="backgroundMode">
+							<option value="original">保持原样</option>
+							<option value="transparent">设为透明</option>
+							<option value="color">使用自选颜色</option>
+						</select>
+					</label>
+
+					<label class="color-field">
+						<span>背景颜色</span>
+						<span class="color-control"><input type="color" value="#ffffff" data-ui-free-control="backgroundColor" aria-label="选择背景颜色" /><output data-ui-free-output="backgroundColor">#FFFFFF</output></span>
+					</label>
+
+					<label class="range-field">
+						<span class="range-head"><span>边框粗细</span><output data-ui-free-output="borderWidth">0px</output></span>
+						<input type="range" min="0" max="6" step="1" value="0" data-ui-free-control="borderWidth" />
+					</label>
+
+					<label class="color-field">
+						<span>边框颜色</span>
+						<span class="color-control"><input type="color" value="#d9d5cd" data-ui-free-control="borderColor" aria-label="选择边框颜色" /><output data-ui-free-output="borderColor">#D9D5CD</output></span>
+					</label>
+
+					<label class="range-field">
+						<span class="range-head"><span>圆角大小</span><output data-ui-free-output="borderRadius">4px</output></span>
+						<input type="range" min="0" max="40" step="2" value="4" data-ui-free-control="borderRadius" />
+					</label>
+
+					<label class="select-field">
+						<span>阴影效果</span>
+						<select data-ui-free-control="shadow">
+							<option value="original">保持原样</option>
+							<option value="none">无阴影</option>
+							<option value="soft">柔和阴影</option>
+							<option value="strong">明显阴影</option>
+						</select>
+					</label>
+				</div>
+			</details>
+
+			<details class="free-control-group">
+				<summary>尺寸与位置</summary>
+				<div class="free-control-body">
+					<label class="range-field">
+						<span class="range-head"><span>元素宽度</span><output data-ui-free-output="widthPercent">100%</output></span>
+						<input type="range" min="30" max="100" step="5" value="100" data-ui-free-control="widthPercent" />
+					</label>
+
+					<label class="range-field">
+						<span class="range-head"><span>左右内边距</span><output data-ui-free-output="paddingX">0px</output></span>
+						<input type="range" min="0" max="64" step="2" value="0" data-ui-free-control="paddingX" />
+					</label>
+
+					<label class="range-field">
+						<span class="range-head"><span>上下内边距</span><output data-ui-free-output="paddingY">0px</output></span>
+						<input type="range" min="0" max="64" step="2" value="0" data-ui-free-control="paddingY" />
+					</label>
+
+					<label class="range-field">
+						<span class="range-head"><span>下方间距</span><output data-ui-free-output="marginBottom">0px</output></span>
+						<input type="range" min="0" max="96" step="4" value="0" data-ui-free-control="marginBottom" />
+					</label>
+
+					<label class="range-field">
+						<span class="range-head"><span>左右移动</span><output data-ui-free-output="offsetX">0px</output></span>
+						<input type="range" min="-160" max="160" step="4" value="0" data-ui-free-control="offsetX" />
+					</label>
+
+					<label class="range-field">
+						<span class="range-head"><span>上下移动</span><output data-ui-free-output="offsetY">0px</output></span>
+						<input type="range" min="-160" max="160" step="4" value="0" data-ui-free-control="offsetY" />
+					</label>
+
+					<label class="range-field">
+						<span class="range-head"><span>透明程度</span><output data-ui-free-output="opacity">100%</output></span>
+						<input type="range" min="20" max="100" step="5" value="100" data-ui-free-control="opacity" />
+					</label>
+				</div>
+			</details>
+
+			<button type="button" class="reset-element-button" data-ui-free-reset-element>恢复所选元素</button>
+		</fieldset>
+	</section>
+
+	<section class="editor-section controls" aria-labelledby="detail-title">
+		<div class="section-title">
+			<h3 id="detail-title">细节调整</h3>
+			<span>自动保存</span>
+		</div>
+
+		<label class="color-field">
+			<span>强调色</span>
+			<span class="color-control">
+				<input type="color" value="#bb3027" data-ui-control="accent" aria-label="选择强调色" />
+				<output data-ui-output="accent">#BB3027</output>
+			</span>
+		</label>
+
+		<label class="select-field">
+			<span>显示模式</span>
+			<select data-ui-control="themeMode">
+				<option value="system">跟随系统</option>
+				<option value="light">始终浅色</option>
+				<option value="dark">始终深色</option>
+			</select>
+		</label>
+
+		<label class="select-field">
+			<span>字体气质</span>
+			<select data-ui-control="fontStyle">
+				<option value="editorial">编辑感：标题宋体，正文清爽</option>
+				<option value="modern">现代感：全站无衬线字体</option>
+				<option value="classic">书卷感：全站中文宋体</option>
+			</select>
+		</label>
+
+		<label class="range-field">
+			<span class="range-head"><span>基础字号</span><output data-ui-output="fontSize">17px</output></span>
+			<input type="range" min="16" max="20" step="1" value="17" data-ui-control="fontSize" />
+		</label>
+
+		<label class="range-field">
+			<span class="range-head"><span>正文宽度</span><output data-ui-output="readingWidth">720px</output></span>
+			<input type="range" min="620" max="860" step="20" value="720" data-ui-control="readingWidth" />
+		</label>
+
+		<label class="range-field">
+			<span class="range-head"><span>阅读行距</span><output data-ui-output="lineHeight">1.95</output></span>
+			<input type="range" min="1.65" max="2.15" step="0.05" value="1.95" data-ui-control="lineHeight" />
+		</label>
+
+		<label class="range-field">
+			<span class="range-head"><span>段落间距</span><output data-ui-output="paragraphSpacing">1.2rem</output></span>
+			<input type="range" min="0.8" max="1.8" step="0.1" value="1.2" data-ui-control="paragraphSpacing" />
+		</label>
+
+		<label class="range-field">
+			<span class="range-head"><span>界面圆角</span><output data-ui-output="radius">4px</output></span>
+			<input type="range" min="0" max="16" step="2" value="4" data-ui-control="radius" />
+		</label>
+
+		<label class="toggle-field">
+			<span><strong>纸张网格</strong><small>保留博客背景上的细线纹理</small></span>
+			<input type="checkbox" checked data-ui-control="grid" />
+		</label>
+
+		<label class="toggle-field">
+			<span><strong>界面动画</strong><small>分类抽屉与控制面板的过渡效果</small></span>
+			<input type="checkbox" checked data-ui-control="motion" />
+		</label>
+	</section>
+
+	<section class="editor-section controls" aria-labelledby="layout-title">
+		<div class="section-title">
+			<h3 id="layout-title">布局与交互</h3>
+			<span>全站即时生效</span>
+		</div>
+
+		<label class="range-field">
+			<span class="range-head"><span>首页大标题</span><output data-ui-output="heroTitleSize">5.8rem</output></span>
+			<input type="range" min="4" max="7" step="0.2" value="5.8" data-ui-control="heroTitleSize" />
+		</label>
+
+		<label class="range-field">
+			<span class="range-head"><span>文章标题大小</span><output data-ui-output="articleTitleSize">4.8rem</output></span>
+			<input type="range" min="3.4" max="5.8" step="0.2" value="4.8" data-ui-control="articleTitleSize" />
+		</label>
+
+		<label class="select-field">
+			<span>文章标题对齐</span>
+			<select data-ui-control="articleTitleAlign">
+				<option value="center">居中</option>
+				<option value="left">左对齐</option>
+			</select>
+		</label>
+
+		<label class="select-field">
+			<span>首页文章列数</span>
+			<select data-ui-control="homeColumns">
+				<option value="3">三列</option>
+				<option value="2">两列</option>
+				<option value="1">单列</option>
+			</select>
+		</label>
+
+		<label class="range-field">
+			<span class="range-head"><span>顶部导航高度</span><output data-ui-output="headerHeight">72px</output></span>
+			<input type="range" min="56" max="96" step="4" value="72" data-ui-control="headerHeight" />
+		</label>
+
+		<label class="select-field">
+			<span>分类入口位置</span>
+			<select data-ui-control="categorySide">
+				<option value="left">屏幕左侧</option>
+				<option value="right">屏幕右侧</option>
+			</select>
+		</label>
+
+		<label class="toggle-field">
+			<span><strong>导航栏吸顶</strong><small>滚动页面时始终显示顶部导航</small></span>
+			<input type="checkbox" checked data-ui-control="stickyHeader" />
+		</label>
+
+		<label class="toggle-field">
+			<span><strong>显示文章分类</strong><small>显示屏幕边缘的滑出式分类入口</small></span>
+			<input type="checkbox" checked data-ui-control="categoryDock" />
+		</label>
+
+		<label class="toggle-field">
+			<span><strong>正文链接下划线</strong><small>让文章中的链接更加醒目</small></span>
+			<input type="checkbox" data-ui-control="linkUnderlines" />
+		</label>
+	</section>
+
+	<footer class="editor-footer">
+		<div class="footer-actions">
+			<button type="button" class="secondary-button" data-ui-editor-reset>恢复默认</button>
+			<button type="button" class="primary-button" data-ui-editor-copy>复制配置</button>
+		</div>
+		<p data-ui-editor-status aria-live="polite">调整完成后复制配置，并粘贴回对话。</p>
+	</footer>
+</aside>
+
+<script>
+	type FontStyle = 'editorial' | 'modern' | 'classic';
+	type SciFiTheme = 'starship' | 'cyber' | 'quantum' | 'mars';
+	type ThemeMode = 'system' | 'light' | 'dark';
+	type ArticleTitleAlign = 'center' | 'left';
+	type CategorySide = 'left' | 'right';
+	type BackgroundMode = 'original' | 'transparent' | 'color';
+	type ShadowMode = 'original' | 'none' | 'soft' | 'strong';
+	type FreeStyle = {
+		color?: string;
+		fontSize?: number;
+		fontWeight?: string;
+		textAlign?: string;
+		backgroundMode?: BackgroundMode;
+		backgroundColor?: string;
+		borderWidth?: number;
+		borderColor?: string;
+		borderRadius?: number;
+		shadow?: ShadowMode;
+		widthPercent?: number;
+		paddingX?: number;
+		paddingY?: number;
+		marginBottom?: number;
+		offsetX?: number;
+		offsetY?: number;
+		opacity?: number;
+	};
+	type FreeRule = {
+		route: string;
+		selector: string;
+		label: string;
+		style: FreeStyle;
+		text?: string;
+	};
+	type UiSettings = {
+		sciFiTheme: SciFiTheme;
+		accent: string;
+		themeMode: ThemeMode;
+		fontStyle: FontStyle;
+		fontSize: number;
+		readingWidth: number;
+		lineHeight: number;
+		paragraphSpacing: number;
+		radius: number;
+		grid: boolean;
+		motion: boolean;
+		heroTitleSize: number;
+		articleTitleSize: number;
+		articleTitleAlign: ArticleTitleAlign;
+		homeColumns: number;
+		headerHeight: number;
+		categorySide: CategorySide;
+		stickyHeader: boolean;
+		categoryDock: boolean;
+		linkUnderlines: boolean;
+	};
+
+	const defaults: UiSettings = {
+		sciFiTheme: 'starship',
+		accent: '#5ce1ff',
+		themeMode: 'dark',
+		fontStyle: 'modern',
+		fontSize: 17,
+		readingWidth: 760,
+		lineHeight: 1.85,
+		paragraphSpacing: 1.15,
+		radius: 14,
+		grid: true,
+		motion: true,
+		heroTitleSize: 5.6,
+		articleTitleSize: 4.4,
+		articleTitleAlign: 'left',
+		homeColumns: 3,
+		headerHeight: 76,
+		categorySide: 'left',
+		stickyHeader: true,
+		categoryDock: true,
+		linkUnderlines: false,
+	};
+
+	const presets: Record<string, UiSettings> = {
+		starship: { ...defaults },
+		cyber: {
+			...defaults,
+			sciFiTheme: 'cyber',
+			accent: '#ff4fe1',
+			fontStyle: 'modern',
+			fontSize: 17,
+			readingWidth: 760,
+			lineHeight: 1.82,
+			paragraphSpacing: 1,
+			radius: 20,
+			grid: true,
+			motion: true,
+			heroTitleSize: 5.2,
+			articleTitleSize: 4.2,
+			articleTitleAlign: 'left',
+			homeColumns: 3,
+			headerHeight: 72,
+			linkUnderlines: true,
+		},
+		quantum: {
+			...defaults,
+			sciFiTheme: 'quantum',
+			accent: '#4f5dff',
+			themeMode: 'light',
+			fontStyle: 'modern',
+			fontSize: 18,
+			readingWidth: 740,
+			lineHeight: 1.95,
+			paragraphSpacing: 1.3,
+			radius: 22,
+			grid: false,
+			motion: true,
+			heroTitleSize: 5.4,
+			articleTitleSize: 4.4,
+			articleTitleAlign: 'center',
+			homeColumns: 2,
+			headerHeight: 80,
+		},
+		mars: {
+			...defaults,
+			sciFiTheme: 'mars',
+			accent: '#ff8a3d',
+			themeMode: 'dark',
+			fontStyle: 'modern',
+			fontSize: 17,
+			readingWidth: 720,
+			lineHeight: 1.8,
+			paragraphSpacing: 1.1,
+			radius: 2,
+			grid: true,
+			motion: true,
+			heroTitleSize: 5,
+			articleTitleSize: 4,
+			articleTitleAlign: 'left',
+			homeColumns: 2,
+			headerHeight: 68,
+		},
+	};
+
+	const storageKey = 'personal-blog-ui-preview-v4';
+	const freeStorageKey = 'personal-blog-ui-free-preview-v4';
+	const panel = document.querySelector<HTMLElement>('[data-ui-editor-panel]');
+	const launcher = document.querySelector<HTMLButtonElement>('[data-ui-editor-launcher]');
+	const status = document.querySelector<HTMLElement>('[data-ui-editor-status]');
+	const freeToggle = document.querySelector<HTMLButtonElement>('[data-ui-free-toggle]');
+	const freeState = document.querySelector<HTMLElement>('[data-ui-free-state]');
+	const freeSelection = document.querySelector<HTMLElement>('[data-ui-free-selection]');
+	const freeControls = document.querySelector<HTMLFieldSetElement>('[data-ui-free-controls]');
+	const freeTextField = document.querySelector<HTMLElement>('[data-ui-free-text-field]');
+	const freeText = document.querySelector<HTMLTextAreaElement>('[data-ui-free-text]');
+	const freeUndo = document.querySelector<HTMLButtonElement>('[data-ui-free-undo]');
+	const freeRedo = document.querySelector<HTMLButtonElement>('[data-ui-free-redo]');
+	const editorAvailable = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+	if (editorAvailable) {
+		if (launcher) launcher.hidden = false;
+		if (panel) panel.hidden = false;
+	}
+	let settings: UiSettings = { ...defaults };
+	let freeRules: Record<string, FreeRule> = {};
+	let freeMode = false;
+	let selectedElement: HTMLElement | null = null;
+	let selectedRuleKey = '';
+	let hoveredElement: HTMLElement | null = null;
+	const originallyStyled = new WeakMap<HTMLElement, string | null>();
+	const originalText = new WeakMap<HTMLElement, string>();
+	const appliedElements = new Set<HTMLElement>();
+	let freeHistory: string[] = [];
+	let freeHistoryIndex = 0;
+
+	try {
+		const saved = localStorage.getItem(storageKey);
+		if (saved) {
+			const parsed = JSON.parse(saved);
+			settings = { ...defaults, ...parsed };
+			if (!parsed.themeMode) {
+				const savedTheme = localStorage.getItem('theme');
+				if (savedTheme === 'light' || savedTheme === 'dark') settings.themeMode = savedTheme;
+			}
+		}
+	} catch {}
+
+	try {
+		const savedFreeRules = localStorage.getItem(freeStorageKey);
+		if (savedFreeRules) freeRules = JSON.parse(savedFreeRules);
+	} catch {}
+
+	freeHistory = [JSON.stringify(freeRules)];
+
+	const fontValues: Record<FontStyle, { serif: string; sans: string }> = {
+		editorial: {
+			serif: "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', SimSun, serif",
+			sans: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+		},
+		modern: {
+			serif: "Inter, 'Noto Sans SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif",
+			sans: "Inter, 'Noto Sans SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif",
+		},
+		classic: {
+			serif: "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', SimSun, serif",
+			sans: "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', SimSun, serif",
+		},
+	};
+
+	function currentRoute() {
+		return window.location.pathname || '/';
+	}
+
+	function queryCount(selector: string) {
+		try { return document.querySelectorAll(selector).length; } catch { return 0; }
+	}
+
+	function makeElementSelector(element: HTMLElement) {
+		if (element.id) {
+			const byId = `#${CSS.escape(element.id)}`;
+			if (queryCount(byId) === 1) return byId;
+		}
+
+		const path: string[] = [];
+		let current: HTMLElement | null = element;
+		while (current && current !== document.body) {
+			let segment = current.localName;
+			const stableClasses = [...current.classList]
+				.filter((name) => !name.startsWith('ui-free-'))
+				.slice(0, 2);
+			if (stableClasses.length) {
+				segment += stableClasses.map((name) => `.${CSS.escape(name)}`).join('');
+				if (queryCount(segment) === 1) return segment;
+			}
+
+			const parent: HTMLElement | null = current.parentElement;
+			if (parent) {
+				const sameTag = [...parent.children].filter((child) => child.localName === current?.localName);
+				if (sameTag.length > 1) segment += `:nth-of-type(${sameTag.indexOf(current) + 1})`;
+			}
+
+			path.unshift(segment);
+			const candidate = path.join(' > ');
+			if (queryCount(candidate) === 1) return candidate;
+			current = parent;
+		}
+
+		return `body > ${path.join(' > ')}`;
+	}
+
+	function makeElementLabel(element: HTMLElement) {
+		const names: Record<string, string> = {
+			h1: '一级标题', h2: '二级标题', h3: '三级标题', p: '正文段落',
+			a: '链接', img: '图片', article: '文章卡片', section: '页面区域',
+			header: '顶部导航', footer: '页脚', button: '按钮', li: '列表项',
+		};
+		const name = names[element.localName] ?? element.localName.toUpperCase();
+		const preview = (element.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 28);
+		return preview ? `${name} · ${preview}${preview.length === 28 ? '…' : ''}` : name;
+	}
+
+	function colorToHex(value: string, fallback: string) {
+		if (value.startsWith('#')) return value.slice(0, 7);
+		const match = value.match(/rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/i);
+		if (!match) return fallback;
+		return `#${[match[1], match[2], match[3]].map((part) => Number(part).toString(16).padStart(2, '0')).join('')}`;
+	}
+
+	function restoreAppliedElements() {
+		for (const element of appliedElements) {
+			const originalStyle = originallyStyled.get(element);
+			if (originalStyle === null) element.removeAttribute('style');
+			else if (originalStyle !== undefined) element.setAttribute('style', originalStyle);
+			if (originalText.has(element)) element.textContent = originalText.get(element) ?? '';
+			element.removeAttribute('data-ui-free-applied');
+			element.classList.remove('ui-free-selected', 'ui-free-hovered');
+		}
+		appliedElements.clear();
+	}
+
+	function applyFreeStyle(element: HTMLElement, style: FreeStyle) {
+		if (!originallyStyled.has(element)) originallyStyled.set(element, element.getAttribute('style'));
+		if (style.color !== undefined) element.style.color = style.color;
+		if (style.fontSize !== undefined) element.style.fontSize = `${style.fontSize}px`;
+		if (style.fontWeight !== undefined) element.style.fontWeight = style.fontWeight;
+		if (style.textAlign !== undefined) element.style.textAlign = style.textAlign;
+		if (style.backgroundMode === 'transparent') element.style.backgroundColor = 'transparent';
+		if (style.backgroundMode === 'color' && style.backgroundColor) element.style.backgroundColor = style.backgroundColor;
+		if (style.borderWidth !== undefined) {
+			element.style.borderWidth = `${style.borderWidth}px`;
+			element.style.borderStyle = style.borderWidth > 0 ? 'solid' : 'none';
+		}
+		if (style.borderColor !== undefined) element.style.borderColor = style.borderColor;
+		if (style.borderRadius !== undefined) element.style.borderRadius = `${style.borderRadius}px`;
+		if (style.shadow === 'none') element.style.boxShadow = 'none';
+		if (style.shadow === 'soft') element.style.boxShadow = '0 12px 32px rgba(20, 23, 28, 0.12)';
+		if (style.shadow === 'strong') element.style.boxShadow = '0 20px 54px rgba(20, 23, 28, 0.24)';
+		if (style.widthPercent !== undefined) {
+			element.style.width = `${style.widthPercent}%`;
+			element.style.boxSizing = 'border-box';
+		}
+		if (style.paddingX !== undefined) {
+			element.style.paddingLeft = `${style.paddingX}px`;
+			element.style.paddingRight = `${style.paddingX}px`;
+		}
+		if (style.paddingY !== undefined) {
+			element.style.paddingTop = `${style.paddingY}px`;
+			element.style.paddingBottom = `${style.paddingY}px`;
+		}
+		if (style.marginBottom !== undefined) element.style.marginBottom = `${style.marginBottom}px`;
+		if (style.offsetX !== undefined || style.offsetY !== undefined) {
+			element.style.transform = `translate(${style.offsetX ?? 0}px, ${style.offsetY ?? 0}px)`;
+		}
+		if (style.opacity !== undefined) element.style.opacity = String(style.opacity / 100);
+		element.dataset.uiFreeApplied = 'true';
+		appliedElements.add(element);
+	}
+
+	function applyAllFreeRules() {
+		restoreAppliedElements();
+		for (const rule of Object.values(freeRules)) {
+			if (rule.route !== currentRoute()) continue;
+			let targets: NodeListOf<HTMLElement>;
+			try { targets = document.querySelectorAll<HTMLElement>(rule.selector); } catch { continue; }
+			for (const element of targets) {
+				applyFreeStyle(element, rule.style);
+				if (rule.text !== undefined && element.children.length === 0) {
+					if (!originalText.has(element)) originalText.set(element, element.textContent ?? '');
+					element.textContent = rule.text;
+				}
+			}
+		}
+		if (freeMode && selectedElement?.isConnected) selectedElement.classList.add('ui-free-selected');
+	}
+
+	function updateHistoryButtons() {
+		if (freeUndo) freeUndo.disabled = freeHistoryIndex <= 0;
+		if (freeRedo) freeRedo.disabled = freeHistoryIndex >= freeHistory.length - 1;
+	}
+
+	function saveFreeRules(commit = false) {
+		const serialized = JSON.stringify(freeRules);
+		try { localStorage.setItem(freeStorageKey, serialized); } catch {}
+		if (commit && serialized !== freeHistory[freeHistoryIndex]) {
+			freeHistory = freeHistory.slice(0, freeHistoryIndex + 1);
+			freeHistory.push(serialized);
+			if (freeHistory.length > 40) freeHistory.shift();
+			freeHistoryIndex = freeHistory.length - 1;
+		}
+		updateHistoryButtons();
+	}
+
+	function restoreFreeHistory(index: number) {
+		if (index < 0 || index >= freeHistory.length) return;
+		freeHistoryIndex = index;
+		try { freeRules = JSON.parse(freeHistory[index]); } catch { freeRules = {}; }
+		saveFreeRules(false);
+		applyAllFreeRules();
+		syncFreeControls();
+	}
+
+	function canEditElementText(element: HTMLElement) {
+		return element.children.length === 0 && ['H1', 'H2', 'H3', 'H4', 'P', 'A', 'SPAN', 'STRONG', 'SMALL', 'TIME', 'LI', 'BUTTON'].includes(element.tagName);
+	}
+
+	function syncFreeControls() {
+		if (!selectedElement || !selectedElement.isConnected) {
+			if (freeControls) freeControls.disabled = true;
+			if (freeTextField) freeTextField.hidden = true;
+			return;
+		}
+
+		if (freeControls) freeControls.disabled = false;
+		const rule = freeRules[selectedRuleKey];
+		const style = rule?.style ?? {};
+		const computed = getComputedStyle(selectedElement);
+		const numericWeight = /^\d+$/.test(computed.fontWeight) ? computed.fontWeight : (computed.fontWeight === 'bold' ? '700' : '400');
+		const values: Record<string, string | number> = {
+			color: style.color ?? colorToHex(computed.color, '#1f2328'),
+			fontSize: style.fontSize ?? Math.round(Number.parseFloat(computed.fontSize) || 17),
+			fontWeight: style.fontWeight ?? numericWeight,
+			textAlign: style.textAlign ?? (computed.textAlign === 'center' || computed.textAlign === 'right' ? computed.textAlign : 'left'),
+			backgroundMode: style.backgroundMode ?? 'original',
+			backgroundColor: style.backgroundColor ?? colorToHex(computed.backgroundColor, '#ffffff'),
+			borderWidth: style.borderWidth ?? Math.round(Number.parseFloat(computed.borderTopWidth) || 0),
+			borderColor: style.borderColor ?? colorToHex(computed.borderTopColor, '#d9d5cd'),
+			borderRadius: style.borderRadius ?? Math.round(Number.parseFloat(computed.borderTopLeftRadius) || 0),
+			shadow: style.shadow ?? 'original',
+			widthPercent: style.widthPercent ?? 100,
+			paddingX: style.paddingX ?? Math.round(Number.parseFloat(computed.paddingLeft) || 0),
+			paddingY: style.paddingY ?? Math.round(Number.parseFloat(computed.paddingTop) || 0),
+			marginBottom: style.marginBottom ?? Math.round(Number.parseFloat(computed.marginBottom) || 0),
+			offsetX: style.offsetX ?? 0,
+			offsetY: style.offsetY ?? 0,
+			opacity: style.opacity ?? Math.round((Number.parseFloat(computed.opacity) || 1) * 100),
+		};
+
+		for (const control of document.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-ui-free-control]')) {
+			const key = control.dataset.uiFreeControl;
+			if (key && values[key] !== undefined) control.value = String(values[key]);
+		}
+
+		const outputs: Record<string, string> = {
+			color: String(values.color).toUpperCase(),
+			fontSize: `${values.fontSize}px`,
+			backgroundColor: String(values.backgroundColor).toUpperCase(),
+			borderWidth: `${values.borderWidth}px`,
+			borderColor: String(values.borderColor).toUpperCase(),
+			borderRadius: `${values.borderRadius}px`,
+			widthPercent: `${values.widthPercent}%`,
+			paddingX: `${values.paddingX}px`,
+			paddingY: `${values.paddingY}px`,
+			marginBottom: `${values.marginBottom}px`,
+			offsetX: `${values.offsetX}px`,
+			offsetY: `${values.offsetY}px`,
+			opacity: `${values.opacity}%`,
+		};
+		for (const [key, value] of Object.entries(outputs)) {
+			const output = document.querySelector<HTMLOutputElement>(`[data-ui-free-output="${key}"]`);
+			if (output) output.value = value;
+		}
+
+		const textEditable = canEditElementText(selectedElement);
+		if (freeTextField) freeTextField.hidden = !textEditable;
+		if (freeText && textEditable) freeText.value = rule?.text ?? selectedElement.textContent?.trim() ?? '';
+	}
+
+	function selectFreeElement(element: HTMLElement) {
+		selectedElement?.classList.remove('ui-free-selected');
+		selectedElement = element;
+		const selector = makeElementSelector(element);
+		selectedRuleKey = `${currentRoute()}::${selector}`;
+		element.classList.add('ui-free-selected');
+		const label = makeElementLabel(element);
+		if (freeSelection) {
+			const heading = document.createElement('strong');
+			const detail = document.createElement('span');
+			heading.textContent = '已选择';
+			detail.textContent = label;
+			freeSelection.replaceChildren(heading, detail);
+		}
+		syncFreeControls();
+		if (status) status.textContent = `已选择“${label}”，现在可以单独修改。`;
+	}
+
+	function setFreeMode(enabled: boolean) {
+		freeMode = enabled;
+		document.documentElement.dataset.uiFreeMode = enabled ? 'on' : 'off';
+		freeToggle?.setAttribute('aria-pressed', String(enabled));
+		if (freeToggle) freeToggle.querySelector('strong')!.textContent = enabled ? '退出点选编辑' : '开启点选编辑';
+		if (freeState) freeState.textContent = enabled ? '正在点选' : '尚未开启';
+		if (!enabled) {
+			hoveredElement?.classList.remove('ui-free-hovered');
+			hoveredElement = null;
+			selectedElement?.classList.remove('ui-free-selected');
+		} else if (selectedElement?.isConnected) {
+			selectedElement.classList.add('ui-free-selected');
+		}
+	}
+
+	function ensureSelectedRule() {
+		if (!selectedElement || !selectedRuleKey) return null;
+		if (!freeRules[selectedRuleKey]) {
+			freeRules[selectedRuleKey] = {
+				route: currentRoute(),
+				selector: makeElementSelector(selectedElement),
+				label: makeElementLabel(selectedElement),
+				style: {},
+			};
+		}
+		return freeRules[selectedRuleKey];
+	}
+
+	function applySettings() {
+		const root = document.documentElement;
+		root.dataset.uiScifiTheme = settings.sciFiTheme;
+		root.style.setProperty('--accent', settings.accent);
+		root.style.setProperty('--ui-body-size', `${settings.fontSize}px`);
+		root.style.setProperty('--ui-reading-width', `${settings.readingWidth}px`);
+		root.style.setProperty('--ui-line-height', String(settings.lineHeight));
+		root.style.setProperty('--ui-paragraph-spacing', `${settings.paragraphSpacing}rem`);
+		root.style.setProperty('--ui-radius', `${settings.radius}px`);
+		root.style.setProperty('--ui-motion-duration', settings.motion ? '240ms' : '0ms');
+		root.style.setProperty('--ui-hero-title-size', `${settings.heroTitleSize}rem`);
+		root.style.setProperty('--ui-article-title-size', `${settings.articleTitleSize}rem`);
+		root.style.setProperty('--ui-header-height', `${settings.headerHeight}px`);
+		root.style.setProperty('--font-serif', fontValues[settings.fontStyle].serif);
+		root.style.setProperty('--font-sans', fontValues[settings.fontStyle].sans);
+		root.dataset.uiGrid = settings.grid ? 'on' : 'off';
+		root.dataset.uiMotion = settings.motion ? 'on' : 'off';
+		root.dataset.uiArticleTitle = settings.articleTitleAlign;
+		root.dataset.uiHomeColumns = String(settings.homeColumns);
+		root.dataset.uiCategorySide = settings.categorySide;
+		root.dataset.uiStickyHeader = settings.stickyHeader ? 'on' : 'off';
+		root.dataset.uiCategoryDock = settings.categoryDock ? 'on' : 'off';
+		root.dataset.uiLinkUnderlines = settings.linkUnderlines ? 'on' : 'off';
+
+		if (settings.themeMode === 'system') {
+			delete root.dataset.theme;
+			try { localStorage.removeItem('theme'); } catch {}
+		} else {
+			root.dataset.theme = settings.themeMode;
+			try { localStorage.setItem('theme', settings.themeMode); } catch {}
+		}
+
+		try { localStorage.setItem(storageKey, JSON.stringify(settings)); } catch {}
+		for (const button of document.querySelectorAll<HTMLButtonElement>('[data-ui-preset]')) {
+			button.setAttribute('aria-pressed', String(button.dataset.uiPreset === settings.sciFiTheme));
+		}
+		syncControls();
+	}
+
+	function syncControls() {
+		for (const element of document.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-ui-control]')) {
+			const key = element.dataset.uiControl as keyof UiSettings;
+			if (!key) continue;
+			if (element instanceof HTMLInputElement && element.type === 'checkbox') {
+				element.checked = Boolean(settings[key]);
+			} else {
+				element.value = String(settings[key]);
+			}
+		}
+
+		const outputs: Record<string, string> = {
+			accent: settings.accent.toUpperCase(),
+			fontSize: `${settings.fontSize}px`,
+			readingWidth: `${settings.readingWidth}px`,
+			lineHeight: settings.lineHeight.toFixed(2),
+			paragraphSpacing: `${settings.paragraphSpacing.toFixed(1)}rem`,
+			radius: `${settings.radius}px`,
+			heroTitleSize: `${settings.heroTitleSize.toFixed(1)}rem`,
+			articleTitleSize: `${settings.articleTitleSize.toFixed(1)}rem`,
+			headerHeight: `${settings.headerHeight}px`,
+		};
+		for (const [key, value] of Object.entries(outputs)) {
+			const output = document.querySelector<HTMLOutputElement>(`[data-ui-output="${key}"]`);
+			if (output) output.value = value;
+		}
+	}
+
+	for (const element of document.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-ui-control]')) {
+		element.addEventListener('input', () => {
+			const key = element.dataset.uiControl as keyof UiSettings;
+			if (!key) return;
+			if (element instanceof HTMLInputElement && element.type === 'checkbox') {
+				(settings as Record<string, unknown>)[key] = element.checked;
+			} else if (element instanceof HTMLInputElement && element.type === 'range') {
+				(settings as Record<string, unknown>)[key] = Number(element.value);
+			} else if (key === 'homeColumns') {
+				settings.homeColumns = Number(element.value);
+			} else {
+				(settings as Record<string, unknown>)[key] = element.value;
+			}
+			applySettings();
+			if (status) status.textContent = '已在本机实时保存。调整满意后请复制配置。';
+		});
+	}
+
+	for (const button of document.querySelectorAll<HTMLButtonElement>('[data-ui-preset]')) {
+		button.addEventListener('click', () => {
+			const preset = button.dataset.uiPreset;
+			if (!preset || !presets[preset]) return;
+			settings = { ...presets[preset] };
+			applySettings();
+			if (status) status.textContent = `已应用“${button.querySelector('strong')?.textContent ?? ''}”风格，可继续微调。`;
+		});
+	}
+
+	freeToggle?.addEventListener('click', () => setFreeMode(!freeMode));
+
+	document.addEventListener('pointerover', (event) => {
+		if (!freeMode || !(event.target instanceof Element)) return;
+		if (event.target.closest('[data-ui-editor-panel], [data-ui-editor-launcher], [data-pagefind-ignore]')) return;
+		const element = event.target instanceof HTMLElement ? event.target : event.target.parentElement;
+		if (!element || element === document.body || element === document.documentElement) return;
+		hoveredElement?.classList.remove('ui-free-hovered');
+		hoveredElement = element;
+		if (element !== selectedElement) element.classList.add('ui-free-hovered');
+	});
+
+	document.addEventListener('click', (event) => {
+		if (!freeMode || !(event.target instanceof Element)) return;
+		if (event.target.closest('[data-ui-editor-panel], [data-ui-editor-launcher], [data-pagefind-ignore]')) return;
+		const element = event.target instanceof HTMLElement ? event.target : event.target.parentElement;
+		if (!element || element === document.body || element === document.documentElement) return;
+		event.preventDefault();
+		event.stopPropagation();
+		hoveredElement?.classList.remove('ui-free-hovered');
+		hoveredElement = null;
+		selectFreeElement(element);
+	}, true);
+
+	const numericFreeControls = new Set([
+		'fontSize', 'borderWidth', 'borderRadius', 'widthPercent', 'paddingX',
+		'paddingY', 'marginBottom', 'offsetX', 'offsetY', 'opacity',
+	]);
+
+	for (const control of document.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-ui-free-control]')) {
+		control.addEventListener('input', () => {
+			const key = control.dataset.uiFreeControl;
+			const rule = ensureSelectedRule();
+			if (!key || !rule) return;
+			if (numericFreeControls.has(key)) {
+				(rule.style as Record<string, unknown>)[key] = Number(control.value);
+			} else {
+				(rule.style as Record<string, unknown>)[key] = control.value;
+			}
+			if (key === 'backgroundColor') {
+				rule.style.backgroundMode = 'color';
+				const modeControl = document.querySelector<HTMLSelectElement>('[data-ui-free-control="backgroundMode"]');
+				if (modeControl) modeControl.value = 'color';
+			}
+			applyAllFreeRules();
+			saveFreeRules(false);
+			syncFreeControls();
+			if (status) status.textContent = '自由调整已在本机实时保存。';
+		});
+		control.addEventListener('change', () => saveFreeRules(true));
+	}
+
+	freeText?.addEventListener('input', () => {
+		const rule = ensureSelectedRule();
+		if (!rule) return;
+		rule.text = freeText.value;
+		applyAllFreeRules();
+		saveFreeRules(false);
+		if (status) status.textContent = '文字内容已在本机实时保存。';
+	});
+	freeText?.addEventListener('change', () => saveFreeRules(true));
+
+	freeUndo?.addEventListener('click', () => restoreFreeHistory(freeHistoryIndex - 1));
+	freeRedo?.addEventListener('click', () => restoreFreeHistory(freeHistoryIndex + 1));
+
+	document.querySelector('[data-ui-free-reset-element]')?.addEventListener('click', () => {
+		if (!selectedRuleKey || !freeRules[selectedRuleKey]) return;
+		delete freeRules[selectedRuleKey];
+		applyAllFreeRules();
+		saveFreeRules(true);
+		syncFreeControls();
+		if (status) status.textContent = '已恢复所选元素原来的样式。';
+	});
+
+	document.querySelector('[data-ui-free-reset-all]')?.addEventListener('click', () => {
+		freeRules = {};
+		applyAllFreeRules();
+		saveFreeRules(true);
+		syncFreeControls();
+		if (status) status.textContent = '已清空所有页面的自由调整，可点击“撤销”找回。';
+	});
+
+	function setPanelOpen(open: boolean) {
+		if (!panel || !launcher) return;
+		if (!open && freeMode) setFreeMode(false);
+		panel.dataset.open = String(open);
+		launcher.setAttribute('aria-expanded', String(open));
+	}
+
+	launcher?.addEventListener('click', () => setPanelOpen(panel?.dataset.open !== 'true'));
+	document.querySelector('[data-ui-editor-close]')?.addEventListener('click', () => setPanelOpen(false));
+	document.querySelector('[data-ui-editor-reset]')?.addEventListener('click', () => {
+		settings = { ...defaults };
+		applySettings();
+		if (status) status.textContent = '已经恢复博客当前的默认界面。';
+	});
+
+	document.querySelector('[data-ui-editor-copy]')?.addEventListener('click', async () => {
+		const summary = [
+			'博客 UI 配置',
+			`3D 科幻方案：${settings.sciFiTheme}`,
+			`主色：${settings.accent.toUpperCase()}`,
+			`显示模式：${settings.themeMode}`,
+			`字体：${settings.fontStyle}`,
+			`基础字号：${settings.fontSize}px`,
+			`正文宽度：${settings.readingWidth}px`,
+			`阅读行距：${settings.lineHeight.toFixed(2)}`,
+			`段落间距：${settings.paragraphSpacing.toFixed(1)}rem`,
+			`圆角：${settings.radius}px`,
+			`首页大标题：${settings.heroTitleSize.toFixed(1)}rem`,
+			`文章标题大小：${settings.articleTitleSize.toFixed(1)}rem`,
+			`文章标题对齐：${settings.articleTitleAlign}`,
+			`首页文章列数：${settings.homeColumns}`,
+			`顶部导航高度：${settings.headerHeight}px`,
+			`分类入口位置：${settings.categorySide}`,
+			`导航栏吸顶：${settings.stickyHeader ? '开启' : '关闭'}`,
+			`显示文章分类：${settings.categoryDock ? '开启' : '关闭'}`,
+			`正文链接下划线：${settings.linkUnderlines ? '开启' : '关闭'}`,
+			`纸张网格：${settings.grid ? '开启' : '关闭'}`,
+			`界面动画：${settings.motion ? '开启' : '关闭'}`,
+			`自由调整元素：${Object.keys(freeRules).length} 个`,
+			`自由调整数据：${JSON.stringify(freeRules)}`,
+		].join('\n');
+
+		try {
+			await navigator.clipboard.writeText(summary);
+			if (status) status.textContent = '配置已复制。请回到对话粘贴，并告诉我“按此发布”。';
+		} catch {
+			if (status) status.textContent = '自动复制未获允许，请把面板上的数值告诉我。';
+		}
+	});
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key !== 'Escape') return;
+		if (freeMode) setFreeMode(false);
+		else if (panel?.dataset.open === 'true') setPanelOpen(false);
+	});
+
+	applySettings();
+	applyAllFreeRules();
+	setFreeMode(false);
+	updateHistoryButtons();
+</script>
+
+<style>
+	.ui-editor-launcher,
+	.ui-editor-panel {
+		position: fixed;
+		z-index: 70;
+		font-family: var(--font-sans);
+	}
+
+	.ui-editor-launcher[hidden],
+	.ui-editor-panel[hidden] { display: none; }
+
+	.ui-editor-launcher {
+		right: 1rem;
+		bottom: 1rem;
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+		padding: 0.7rem 0.95rem;
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		background: var(--ink);
+		box-shadow: 0 12px 32px color-mix(in srgb, var(--ink) 22%, transparent);
+		color: var(--paper);
+		cursor: pointer;
+		font-size: 0.82rem;
+		font-weight: 700;
+	}
+
+	.ui-editor-launcher:hover { background: var(--accent); color: white; }
+
+	.ui-editor-panel {
+		top: 5.4rem;
+		right: 1rem;
+		width: min(22rem, calc(100vw - 2rem));
+		max-height: calc(100vh - 7rem);
+		padding: 1.15rem;
+		overflow-y: auto;
+		border: 1px solid var(--line);
+		border-radius: max(var(--ui-radius), 8px);
+		background: color-mix(in srgb, var(--paper) 97%, transparent);
+		box-shadow: 0 24px 70px color-mix(in srgb, var(--ink) 24%, transparent);
+		backdrop-filter: blur(18px);
+		color: var(--ink);
+		transform: translateX(calc(100% + 2rem));
+		opacity: 0;
+		pointer-events: none;
+		transition:
+			transform var(--ui-motion-duration) cubic-bezier(0.22, 1, 0.36, 1),
+			opacity var(--ui-motion-duration) ease;
+	}
+
+	.ui-editor-panel[data-open='true'] {
+		transform: translateX(0);
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.editor-head,
+	.section-title,
+	.color-field,
+	.range-head,
+	.toggle-field,
+	.footer-actions {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.8rem;
+	}
+
+	.editor-head p {
+		margin: 0 0 0.2rem;
+		color: var(--accent);
+		font-size: 0.67rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+	}
+
+	.editor-head h2 { margin: 0; font-family: var(--font-serif); font-size: 1.35rem; }
+
+	.icon-button {
+		display: grid;
+		width: 2.2rem;
+		height: 2.2rem;
+		place-items: center;
+		border: 1px solid var(--line);
+		border-radius: 50%;
+		background: transparent;
+		color: var(--muted);
+		cursor: pointer;
+		font-size: 1.25rem;
+	}
+
+	.icon-button:hover { border-color: var(--accent); color: var(--accent); }
+
+	.editor-note {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 0.55rem;
+		margin: 1rem 0;
+		padding: 0.75rem;
+		border-radius: max(var(--ui-radius), 6px);
+		background: var(--paper-deep);
+		font-size: 0.78rem;
+	}
+
+	.editor-note > span { color: var(--accent); font-size: 0.55rem; line-height: 1.8rem; }
+	.editor-note p { margin: 0; line-height: 1.55; }
+	.editor-note strong { display: block; color: var(--ink); }
+
+	.free-editor { display: grid; gap: 0.75rem; }
+	.free-editor .section-title { margin-bottom: 0; }
+
+	.free-mode-button {
+		display: flex;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 0.8rem;
+		border: 1px solid var(--accent);
+		border-radius: max(var(--ui-radius), 6px);
+		background: color-mix(in srgb, var(--accent) 8%, var(--paper));
+		color: var(--accent);
+		cursor: pointer;
+		font-size: 0.8rem;
+	}
+
+	.free-mode-button[aria-pressed='true'] { background: var(--accent); color: white; }
+	.free-mode-button > span { font-size: 1rem; }
+	.free-help { margin: 0; color: var(--muted); font-size: 0.7rem; line-height: 1.55; }
+
+	.free-history-actions {
+		display: grid;
+		grid-template-columns: 0.7fr 0.7fr 1.6fr;
+		gap: 0.4rem;
+	}
+
+	.free-history-actions button,
+	.reset-element-button {
+		padding: 0.55rem 0.35rem;
+		border: 1px solid var(--line);
+		border-radius: max(var(--ui-radius), 5px);
+		background: transparent;
+		color: var(--ink);
+		cursor: pointer;
+		font-size: 0.7rem;
+	}
+
+	.free-history-actions button:hover:not(:disabled),
+	.reset-element-button:hover { border-color: var(--accent); color: var(--accent); }
+	.free-history-actions button:disabled { cursor: not-allowed; opacity: 0.38; }
+
+	.free-selection {
+		display: grid;
+		gap: 0.2rem;
+		padding: 0.7rem;
+		border: 1px dashed var(--line);
+		border-radius: max(var(--ui-radius), 5px);
+		background: var(--paper-deep);
+		font-size: 0.72rem;
+	}
+
+	.free-selection span { overflow: hidden; color: var(--muted); text-overflow: ellipsis; white-space: nowrap; }
+
+	.free-controls {
+		display: grid;
+		gap: 0.65rem;
+		min-width: 0;
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+
+	.free-controls:disabled { opacity: 0.48; }
+	.free-text-field { display: grid; gap: 0.4rem; font-size: 0.76rem; }
+	.free-text-field[hidden] { display: none; }
+	.free-text-field textarea {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0.65rem;
+		resize: vertical;
+		border: 1px solid var(--line);
+		border-radius: max(var(--ui-radius), 5px);
+		background: var(--paper);
+		color: var(--ink);
+		font: inherit;
+		line-height: 1.5;
+	}
+
+	.free-control-group {
+		border: 1px solid var(--line);
+		border-radius: max(var(--ui-radius), 6px);
+		background: color-mix(in srgb, var(--paper) 96%, var(--paper-deep));
+	}
+
+	.free-control-group summary {
+		padding: 0.68rem;
+		cursor: pointer;
+		font-size: 0.75rem;
+		font-weight: 700;
+	}
+
+	.free-control-body {
+		display: grid;
+		gap: 0.85rem;
+		padding: 0.2rem 0.7rem 0.8rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.reset-element-button { width: 100%; }
+
+	.editor-section {
+		padding: 1rem 0;
+		border-top: 1px solid var(--line);
+	}
+
+	.section-title { margin-bottom: 0.75rem; }
+	.section-title h3 { margin: 0; font-size: 0.9rem; }
+	.section-title span { color: var(--muted); font-size: 0.72rem; }
+
+	.preset-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.6rem;
+	}
+
+	.preset-grid button {
+		display: grid;
+		gap: 0.16rem;
+		padding: 0.45rem;
+		border: 1px solid var(--line);
+		border-radius: max(var(--ui-radius), 5px);
+		background: color-mix(in srgb, var(--paper-deep) 78%, transparent);
+		color: var(--ink);
+		cursor: pointer;
+		font-size: 0.74rem;
+		text-align: left;
+		transition: transform var(--ui-motion-duration) ease, border-color var(--ui-motion-duration) ease, box-shadow var(--ui-motion-duration) ease;
+	}
+
+	.preset-grid button:hover { transform: translateY(-3px); border-color: var(--accent); }
+	.preset-grid button[aria-pressed='true'] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 10px 24px color-mix(in srgb, var(--accent) 20%, transparent); }
+	.preset-grid small { color: var(--muted); font-size: 0.67rem; }
+	.preset-visual {
+		position: relative;
+		display: block;
+		height: 3.7rem;
+		margin-bottom: 0.32rem;
+		overflow: hidden;
+		border-radius: max(calc(var(--ui-radius) - 3px), 4px);
+		perspective: 180px;
+	}
+	.preset-visual i { position: absolute; display: block; border: 1px solid currentColor; background: color-mix(in srgb, currentColor 12%, transparent); }
+	.preset-visual i:nth-child(1) { inset: 0.55rem 1.1rem 0.6rem; transform: rotateX(54deg) rotateZ(-8deg); }
+	.preset-visual i:nth-child(2) { width: 2.3rem; height: 1.6rem; top: 0.55rem; left: 0.65rem; transform: translateZ(18px) rotateY(12deg); }
+	.preset-visual i:nth-child(3) { width: 1.8rem; height: 1.15rem; right: 0.55rem; bottom: 0.5rem; transform: translateZ(26px) rotateY(-18deg); }
+	.preset-visual.starship { color: #5ce1ff; background: radial-gradient(circle at 70% 24%, rgba(111, 123, 255, 0.72), transparent 24%), linear-gradient(145deg, #061328, #020713); }
+	.preset-visual.cyber { color: #ff4fe1; background: radial-gradient(circle at 24% 70%, rgba(0, 229, 255, 0.7), transparent 24%), linear-gradient(145deg, #1b0628, #07020e); }
+	.preset-visual.quantum { color: #4f5dff; background: radial-gradient(circle at 72% 24%, rgba(0, 205, 255, 0.45), transparent 28%), linear-gradient(145deg, #f7fdff, #cfe6ff); }
+	.preset-visual.mars { color: #ff8a3d; background: radial-gradient(circle at 30% 26%, rgba(255, 209, 102, 0.45), transparent 24%), linear-gradient(145deg, #2c140d, #0d0806); }
+
+	.controls { display: grid; gap: 0.95rem; }
+	.controls .section-title { margin-bottom: -0.1rem; }
+
+	.color-field,
+	.select-field,
+	.range-field,
+	.toggle-field { font-size: 0.78rem; }
+
+	.color-control { display: flex; align-items: center; gap: 0.45rem; }
+	.color-control input { width: 2.5rem; height: 1.8rem; padding: 0.12rem; border: 1px solid var(--line); border-radius: 4px; background: transparent; cursor: pointer; }
+	.color-control output,
+	.range-head output { color: var(--muted); font-size: 0.72rem; font-variant-numeric: tabular-nums; }
+
+	.select-field { display: grid; gap: 0.45rem; }
+	.select-field select {
+		width: 100%;
+		padding: 0.62rem;
+		border: 1px solid var(--line);
+		border-radius: max(var(--ui-radius), 5px);
+		background: var(--paper);
+		color: var(--ink);
+	}
+
+	.range-field { display: grid; gap: 0.35rem; }
+	.range-field input { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+	.toggle-field > span { display: grid; }
+	.toggle-field small { color: var(--muted); font-size: 0.68rem; line-height: 1.45; }
+	.toggle-field input { width: 1.15rem; height: 1.15rem; accent-color: var(--accent); cursor: pointer; }
+
+	.editor-footer {
+		padding-top: 1rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.footer-actions button {
+		flex: 1;
+		padding: 0.68rem;
+		border-radius: max(var(--ui-radius), 5px);
+		cursor: pointer;
+		font-size: 0.78rem;
+		font-weight: 700;
+	}
+
+	.secondary-button { border: 1px solid var(--line); background: transparent; color: var(--ink); }
+	.primary-button { border: 1px solid var(--ink); background: var(--ink); color: var(--paper); }
+	.primary-button:hover { border-color: var(--accent); background: var(--accent); color: white; }
+
+	.editor-footer p { min-height: 2.6em; margin: 0.6rem 0 0; color: var(--muted); font-size: 0.68rem; line-height: 1.5; }
+
+	:global(html[data-ui-scifi-theme='starship']) {
+		--paper: #030812;
+		--paper-deep: #071426;
+		--ink: #e8fbff;
+		--muted: #86a9ba;
+		--line: rgba(92, 225, 255, 0.22);
+		--sci-secondary: #6f7bff;
+		--sci-surface: rgba(7, 24, 45, 0.72);
+		--sci-surface-strong: rgba(8, 31, 58, 0.94);
+		color-scheme: dark;
+	}
+
+	:global(html[data-ui-scifi-theme='cyber']) {
+		--paper: #08030f;
+		--paper-deep: #160823;
+		--ink: #fff0ff;
+		--muted: #b897c4;
+		--line: rgba(255, 79, 225, 0.24);
+		--sci-secondary: #00e5ff;
+		--sci-surface: rgba(27, 6, 40, 0.72);
+		--sci-surface-strong: rgba(36, 8, 49, 0.94);
+		color-scheme: dark;
+	}
+
+	:global(html[data-ui-scifi-theme='quantum']) {
+		--paper: #eaf7ff;
+		--paper-deep: #d8ecff;
+		--ink: #0b1b38;
+		--muted: #536581;
+		--line: rgba(79, 93, 255, 0.2);
+		--sci-secondary: #00a8c9;
+		--sci-surface: rgba(250, 254, 255, 0.68);
+		--sci-surface-strong: rgba(245, 252, 255, 0.94);
+		color-scheme: light;
+	}
+
+	:global(html[data-ui-scifi-theme='mars']) {
+		--paper: #0e0907;
+		--paper-deep: #1d110c;
+		--ink: #fff3e8;
+		--muted: #bc9a83;
+		--line: rgba(255, 138, 61, 0.25);
+		--sci-secondary: #ffd166;
+		--sci-surface: rgba(34, 17, 11, 0.76);
+		--sci-surface-strong: rgba(45, 22, 13, 0.95);
+		color-scheme: dark;
+	}
+
+	:global(html[data-ui-scifi-theme][data-theme='light']:not([data-ui-scifi-theme='quantum'])) {
+		--paper: #edf7fb;
+		--paper-deep: #dcebf1;
+		--ink: #10222d;
+		--muted: #526b77;
+		--line: color-mix(in srgb, var(--accent) 24%, transparent);
+		--sci-surface: rgba(248, 253, 255, 0.74);
+		--sci-surface-strong: rgba(247, 252, 255, 0.96);
+		color-scheme: light;
+	}
+
+	:global(html[data-ui-scifi-theme] body) {
+		position: relative;
+		min-height: 100vh;
+		overflow-x: hidden;
+		background-attachment: fixed;
+		transition: background 420ms ease, color 260ms ease;
+	}
+
+	:global(html[data-ui-scifi-theme='starship'] body) {
+		background:
+			radial-gradient(circle at 78% 12%, rgba(111, 123, 255, 0.2), transparent 27rem),
+			radial-gradient(circle at 12% 44%, rgba(92, 225, 255, 0.12), transparent 24rem),
+			linear-gradient(rgba(92, 225, 255, 0.045) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(92, 225, 255, 0.045) 1px, transparent 1px),
+			var(--paper);
+		background-size: auto, auto, 72px 72px, 72px 72px, auto;
+	}
+
+	:global(html[data-ui-scifi-theme='cyber'] body) {
+		background:
+			radial-gradient(circle at 16% 16%, rgba(255, 79, 225, 0.22), transparent 25rem),
+			radial-gradient(circle at 88% 44%, rgba(0, 229, 255, 0.15), transparent 27rem),
+			repeating-linear-gradient(118deg, transparent 0 46px, rgba(255, 79, 225, 0.035) 47px 48px),
+			var(--paper);
+	}
+
+	:global(html[data-ui-scifi-theme='quantum'] body) {
+		background:
+			radial-gradient(circle at 15% 12%, rgba(0, 196, 255, 0.26), transparent 28rem),
+			radial-gradient(circle at 84% 20%, rgba(139, 92, 246, 0.2), transparent 30rem),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.7), transparent 44%),
+			var(--paper);
+	}
+
+	:global(html[data-ui-scifi-theme='mars'] body) {
+		background:
+			radial-gradient(circle at 72% 8%, rgba(255, 138, 61, 0.22), transparent 25rem),
+			repeating-linear-gradient(135deg, transparent 0 32px, rgba(255, 209, 102, 0.025) 33px 34px),
+			linear-gradient(180deg, #170b07 0%, var(--paper) 52%);
+	}
+
+	:global(html[data-ui-scifi-theme] body::before) {
+		position: fixed;
+		z-index: -1;
+		inset: 0;
+		content: '';
+		pointer-events: none;
+		background: linear-gradient(115deg, transparent 28%, color-mix(in srgb, var(--accent) 7%, transparent) 50%, transparent 72%);
+		transform: translateX(-70%);
+		animation: sci-scan 11s linear infinite;
+	}
+
+	:global(html[data-ui-scifi-theme] body > header) {
+		border-bottom: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+		background: color-mix(in srgb, var(--sci-surface-strong) 88%, transparent);
+		box-shadow: 0 14px 42px rgba(0, 0, 0, 0.2), inset 0 -1px 0 color-mix(in srgb, var(--sci-secondary) 24%, transparent);
+		backdrop-filter: blur(22px) saturate(130%);
+	}
+
+	:global(html[data-ui-scifi-theme] .brand-mark) {
+		border: 1px solid color-mix(in srgb, var(--accent) 78%, white 22%);
+		background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 82%, white 18%), color-mix(in srgb, var(--sci-secondary) 76%, black 24%));
+		box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 48%, transparent), inset 3px 3px 7px rgba(255, 255, 255, 0.28), inset -4px -5px 8px rgba(0, 0, 0, 0.28);
+		transform: rotate(-8deg) translateZ(0);
+	}
+
+	:global(html[data-ui-scifi-theme] main) { position: relative; perspective: 1400px; }
+	:global(html[data-ui-scifi-theme] h1),
+	:global(html[data-ui-scifi-theme] h2),
+	:global(html[data-ui-scifi-theme] h3) { text-shadow: 0 0 28px color-mix(in srgb, var(--accent) 16%, transparent); }
+	:global(html[data-ui-scifi-theme] .hero) { position: relative; z-index: 0; transform-style: preserve-3d; }
+	:global(html[data-ui-scifi-theme] .hero::after) {
+		position: absolute;
+		z-index: -1;
+		top: 14%;
+		right: 2%;
+		width: clamp(8rem, 21vw, 15rem);
+		aspect-ratio: 1;
+		border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+		border-radius: 32%;
+		content: '';
+		background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%);
+		box-shadow: 0 0 70px color-mix(in srgb, var(--accent) 13%, transparent), inset 0 0 42px color-mix(in srgb, var(--sci-secondary) 15%, transparent);
+		transform: rotateX(62deg) rotateZ(36deg) translateZ(-40px);
+	}
+
+	:global(html[data-ui-scifi-theme] .button) {
+		border: 1px solid color-mix(in srgb, var(--accent) 72%, white 10%);
+		background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 82%, white 12%), color-mix(in srgb, var(--accent) 68%, black 32%));
+		box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 24%, transparent), inset 2px 2px 4px rgba(255, 255, 255, 0.28), inset -4px -5px 8px rgba(0, 0, 0, 0.24);
+		color: white;
+		transform: translateZ(18px);
+		transition: transform var(--ui-motion-duration) ease, box-shadow var(--ui-motion-duration) ease;
+	}
+
+	:global(html[data-ui-scifi-theme] .button:hover) { transform: translateY(-3px) translateZ(24px); box-shadow: 0 18px 38px color-mix(in srgb, var(--accent) 34%, transparent); }
+	:global(html[data-ui-scifi-theme] .latest) { border-top-color: color-mix(in srgb, var(--accent) 28%, transparent); }
+	:global(html[data-ui-scifi-theme] .post-grid) { gap: 1rem; border-top: 0; perspective: 1200px; }
+
+	:global(html[data-ui-scifi-theme] .post-card),
+	:global(html[data-ui-scifi-theme] .post-list article),
+	:global(html[data-ui-scifi-theme] .years section),
+	:global(html[data-ui-scifi-theme] .about-copy),
+	:global(html[data-ui-scifi-theme] .not-found) {
+		position: relative;
+		overflow: hidden;
+		border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+		border-radius: var(--ui-radius);
+		background: linear-gradient(145deg, color-mix(in srgb, var(--sci-surface) 95%, white 5%), color-mix(in srgb, var(--sci-surface) 92%, black 8%));
+		box-shadow: 0 20px 52px rgba(0, 0, 0, 0.2), inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(16px) saturate(125%);
+		transform-style: preserve-3d;
+		transition: transform var(--ui-motion-duration) cubic-bezier(0.22, 1, 0.36, 1), border-color var(--ui-motion-duration) ease, box-shadow var(--ui-motion-duration) ease;
+	}
+
+	:global(html[data-ui-scifi-theme] .post-card) { border-right: 1px solid color-mix(in srgb, var(--accent) 26%, transparent); }
+	:global(html[data-ui-scifi-theme] .post-card:nth-child(1)) { transform: rotateY(3deg) translateZ(8px); }
+	:global(html[data-ui-scifi-theme] .post-card:nth-child(2)) { transform: translateY(-8px) translateZ(18px); }
+	:global(html[data-ui-scifi-theme] .post-card:nth-child(3)) { transform: rotateY(-3deg) translateZ(8px); }
+	:global(html[data-ui-scifi-theme] .post-card:hover),
+	:global(html[data-ui-scifi-theme] .post-list article:hover) {
+		z-index: 2;
+		border-color: color-mix(in srgb, var(--accent) 72%, transparent);
+		box-shadow: 0 28px 70px color-mix(in srgb, var(--accent) 18%, rgba(0, 0, 0, 0.26)), inset 1px 1px 0 rgba(255, 255, 255, 0.16);
+		transform: translateY(-10px) rotateX(2deg) translateZ(28px);
+	}
+
+	:global(html[data-ui-scifi-theme] article[data-pagefind-body]) {
+		padding: clamp(1rem, 3vw, 2.4rem);
+		border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+		border-radius: calc(var(--ui-radius) * 1.25);
+		background: color-mix(in srgb, var(--sci-surface) 82%, transparent);
+		box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(14px);
+	}
+
+	:global(html[data-ui-scifi-theme] code) { border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent); }
+	:global(html[data-ui-scifi-theme] pre) { border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); background: color-mix(in srgb, var(--paper-deep) 88%, black 12%); box-shadow: inset 0 0 34px rgba(0, 0, 0, 0.22); }
+	:global(html[data-ui-scifi-theme] blockquote) { border-left-color: var(--accent); background: color-mix(in srgb, var(--sci-surface) 64%, transparent); box-shadow: inset 12px 0 28px color-mix(in srgb, var(--accent) 5%, transparent); }
+	:global(html[data-ui-scifi-theme] body > footer) { border-top-color: color-mix(in srgb, var(--accent) 22%, transparent); background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--paper-deep) 54%, transparent)); }
+
+	:global(html[data-ui-scifi-theme='cyber'] .post-card),
+	:global(html[data-ui-scifi-theme='cyber'] .post-list article) {
+		background: linear-gradient(145deg, rgba(38, 8, 52, 0.88), rgba(6, 22, 34, 0.8));
+		box-shadow: -10px 16px 42px rgba(255, 79, 225, 0.1), 12px 12px 46px rgba(0, 229, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.11);
+	}
+	:global(html[data-ui-scifi-theme='cyber'] .post-card:nth-child(odd)) { border-color: rgba(0, 229, 255, 0.28); }
+	:global(html[data-ui-scifi-theme='cyber'] .hero h1) { background: linear-gradient(90deg, var(--ink), var(--accent) 54%, var(--sci-secondary)); background-clip: text; color: transparent; }
+
+	:global(html[data-ui-scifi-theme='quantum'] .post-card),
+	:global(html[data-ui-scifi-theme='quantum'] .post-list article),
+	:global(html[data-ui-scifi-theme='quantum'] article[data-pagefind-body]) {
+		border-color: rgba(255, 255, 255, 0.8);
+		background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(214, 237, 255, 0.52));
+		box-shadow: 18px 24px 60px rgba(51, 93, 160, 0.14), -8px -8px 26px rgba(255, 255, 255, 0.84), inset 1px 1px 0 rgba(255, 255, 255, 0.95);
+	}
+	:global(html[data-ui-scifi-theme='quantum'] .hero h1) { background: linear-gradient(105deg, #0b1b38 18%, var(--accent) 56%, var(--sci-secondary)); background-clip: text; color: transparent; }
+
+	:global(html[data-ui-scifi-theme='mars'] .post-card),
+	:global(html[data-ui-scifi-theme='mars'] .post-list article),
+	:global(html[data-ui-scifi-theme='mars'] article[data-pagefind-body]) {
+		border-color: rgba(255, 138, 61, 0.32);
+		border-radius: 0;
+		background: linear-gradient(145deg, rgba(51, 25, 15, 0.94), rgba(20, 12, 9, 0.9));
+		box-shadow: 12px 18px 0 rgba(0, 0, 0, 0.24), 0 22px 48px rgba(255, 93, 25, 0.08), inset 0 1px 0 rgba(255, 209, 102, 0.16);
+		clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+	}
+	:global(html[data-ui-scifi-theme='mars'] .eyebrow),
+	:global(html[data-ui-scifi-theme='mars'] .post-number) { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+
+	:global(html[data-ui-scifi-theme] .ui-editor-panel) {
+		border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+		background: color-mix(in srgb, var(--sci-surface-strong) 92%, transparent);
+		box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34), 0 0 42px color-mix(in srgb, var(--accent) 10%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.11);
+	}
+	:global(html[data-ui-scifi-theme] .ui-editor-launcher) { border-color: color-mix(in srgb, var(--accent) 54%, transparent); box-shadow: 0 10px 34px color-mix(in srgb, var(--accent) 24%, transparent); }
+
+	@keyframes sci-scan {
+		0% { transform: translateX(-70%); }
+		100% { transform: translateX(70%); }
+	}
+
+	:global(html[data-ui-grid='off'] body) { background: var(--paper); }
+	:global(html[data-ui-motion='off'] *) { scroll-behavior: auto !important; }
+	:global(html[data-ui-motion='off'] body::before) { animation: none; }
+	:global(html[data-ui-sticky-header='off'] body > header) { position: static; }
+	:global(html[data-ui-category-dock='off'] .category-dock) { display: none; }
+	:global(html[data-ui-link-underlines='on'] main a) { text-decoration: underline; text-underline-offset: 0.22em; }
+	:global(html[data-ui-free-mode='on'] main),
+	:global(html[data-ui-free-mode='on'] body > header),
+	:global(html[data-ui-free-mode='on'] body > footer) { cursor: crosshair; }
+	:global(.ui-free-hovered) { outline: 1px dashed var(--accent) !important; outline-offset: 3px; }
+	:global(.ui-free-selected) { outline: 3px solid var(--accent) !important; outline-offset: 4px; }
+
+	:global(html[data-ui-article-title='left'] .article-head) { text-align: left; }
+	:global(html[data-ui-article-title='left'] .article-head .description) { margin-right: 0; margin-left: 0; }
+	:global(html[data-ui-article-title='left'] .article-head .meta) { justify-content: flex-start; }
+
+	:global(html[data-ui-home-columns='1'] .post-grid) { grid-template-columns: 1fr; }
+	:global(html[data-ui-home-columns='2'] .post-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	:global(html[data-ui-home-columns='3'] .post-grid) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+	:global(html[data-ui-category-side='right'] .category-dock) {
+		right: 0;
+		left: auto;
+		grid-template-columns: 3.2rem minmax(0, 1fr);
+		transform: translate(calc(100% - 3.2rem), -50%);
+	}
+
+	:global(html[data-ui-category-side='right'] .category-dock:hover),
+	:global(html[data-ui-category-side='right'] .category-dock:focus-within),
+	:global(html[data-ui-category-side='right'] .category-dock.is-open) { transform: translate(0, -50%); }
+
+	:global(html[data-ui-category-side='right'] .category-dock .category-panel) {
+		grid-column: 2;
+		border-right: 0;
+		border-left: 1px solid var(--line);
+		border-radius: 0 0 0 8px;
+	}
+
+	:global(html[data-ui-category-side='right'] .category-dock .category-tab) {
+		grid-row: 1;
+		grid-column: 1;
+		border-radius: 8px 0 0 8px;
+	}
+
+	@media (max-width: 720px) {
+		.ui-editor-panel {
+			top: auto;
+			right: 0.5rem;
+			bottom: 0.5rem;
+			width: calc(100vw - 1rem);
+			max-height: min(78vh, 42rem);
+			transform: translateY(calc(100% + 1rem));
+		}
+
+		.ui-editor-panel[data-open='true'] { transform: translateY(0); }
+		.ui-editor-launcher { right: 0.75rem; bottom: 0.75rem; }
+		:global(html[data-ui-home-columns] .post-grid) { grid-template-columns: 1fr; }
+		:global(html[data-ui-scifi-theme] .post-card:nth-child(1)),
+		:global(html[data-ui-scifi-theme] .post-card:nth-child(2)),
+		:global(html[data-ui-scifi-theme] .post-card:nth-child(3)) { transform: none; }
+		:global(html[data-ui-scifi-theme] .post-card:hover) { transform: translateY(-4px); }
+		:global(html[data-ui-scifi-theme] .hero::after) { right: -3rem; opacity: 0.46; }
+		:global(html[data-ui-scifi-theme] article[data-pagefind-body]) { padding: 1rem; }
+		:global(html[data-ui-category-side='right'] .category-dock) { transform: translateX(calc(100% - 3.2rem)); }
+		:global(html[data-ui-category-side='right'] .category-dock:hover),
+		:global(html[data-ui-category-side='right'] .category-dock:focus-within),
+		:global(html[data-ui-category-side='right'] .category-dock.is-open) { transform: translateX(0); }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ui-editor-panel { transition: none; }
+		:global(html[data-ui-scifi-theme] body::before) { animation: none; }
+		:global(html[data-ui-scifi-theme] .post-card),
+		:global(html[data-ui-scifi-theme] .post-list article),
+		:global(html[data-ui-scifi-theme] .button) { transition: none; }
+	}
+</style>

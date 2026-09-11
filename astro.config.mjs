@@ -6,6 +6,6 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: process.env.SITE_URL ?? 'https://example.github.io',
+	site: process.env.SITE_URL ?? 'https://zouyang007.github.io',
 	integrations: [mdx(), sitemap()],
 });

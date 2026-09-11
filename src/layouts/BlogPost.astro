@@ -6,13 +6,14 @@ import CategoryDock from '../components/CategoryDock.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import UiCustomizer from '../components/UiCustomizer.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 const { title, description, pubDate, updatedDate, heroImage, category, tags } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-ui-scifi-theme="starship" data-theme="dark">
 	<head>
 		<BaseHead
 			title={`${title}`}
@@ -26,6 +27,7 @@ const { title, description, pubDate, updatedDate, heroImage, category, tags } = 
 	<body>
 		<Header />
 		<CategoryDock />
+		<UiCustomizer />
 		<main>
 			<article data-pagefind-body>
 				<header class="article-head">
@@ -54,15 +56,15 @@ const { title, description, pubDate, updatedDate, heroImage, category, tags } = 
 	main { width: min(900px, calc(100% - 2rem)); padding-top: clamp(3.5rem, 8vw, 7rem); }
 	.article-head { max-width: 760px; margin: 0 auto 3rem; text-align: center; }
 	.category { display: inline-block; color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-decoration: none; }
-	h1 { margin: 0.8rem auto 1.2rem; font-size: clamp(2.4rem, 7vw, 4.8rem); letter-spacing: -0.04em; }
+	h1 { margin: 0.8rem auto 1.2rem; font-size: clamp(2.4rem, 7vw, var(--ui-article-title-size)); letter-spacing: -0.04em; }
 	.description { max-width: 620px; margin: 0 auto 1.3rem; color: var(--muted); font-size: 1.08rem; }
 	.meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; color: var(--muted); font-size: 0.78rem; }
 	.hero-image { display: block; width: 100%; margin: 0 auto 3rem; }
-	.prose { max-width: 720px; margin: 0 auto; font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.95; }
+	.prose { max-width: var(--ui-reading-width); margin: 0 auto; font-family: var(--font-serif); font-size: 1.08rem; line-height: var(--ui-line-height); }
 	.prose :global(h2), .prose :global(h3) { margin-top: 2.4em; scroll-margin-top: 6rem; }
 	.prose :global(a) { text-underline-offset: 0.2em; }
 	.prose :global(li) { margin: 0.45rem 0; }
-	.article-footer { max-width: 720px; margin: 4rem auto 0; padding-top: 2rem; border-top: 1px solid var(--line); }
+	.article-footer { max-width: var(--ui-reading-width); margin: 4rem auto 0; padding-top: 2rem; border-top: 1px solid var(--line); }
 	.article-footer p { margin-bottom: 0.65rem; color: var(--muted); font-size: 0.78rem; }
 	.article-footer ul { display: flex; flex-wrap: wrap; gap: 0.65rem; margin: 0 0 2rem; padding: 0; list-style: none; }
 	.article-footer li a { color: var(--muted); font-size: 0.82rem; }

@@ -78,7 +78,7 @@ const categories = getCategories(posts).map((name) => ({
 		width: min(19rem, calc(100vw - 1rem));
 		max-height: min(75vh, 38rem);
 		transform: translate(calc(-100% + 3.2rem), -50%);
-		transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+		transition: transform var(--ui-motion-duration) cubic-bezier(0.22, 1, 0.36, 1);
 		filter: drop-shadow(0 16px 28px color-mix(in srgb, var(--ink) 14%, transparent));
 	}
 

@@ -25,7 +25,7 @@ const { items, basePath } = Astro.props;
 
 <style>
 	ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; margin: 0; padding: 0; list-style: none; }
-	a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.2rem; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); text-decoration: none; }
+	a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.2rem; border: 1px solid var(--line); border-radius: max(var(--ui-radius), 4px); color: var(--ink); text-decoration: none; }
 	a:hover { border-color: var(--accent); color: var(--accent); }
 	small { color: var(--muted); white-space: nowrap; }
 	@media (max-width: 620px) { ul { grid-template-columns: 1fr; } }
