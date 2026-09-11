@@ -341,7 +341,8 @@ const bookHues = [188, 216, 258, 304, 24, 154, 46, 278];
 		grid-template-columns: minmax(0, 1.5fr) minmax(16rem, 0.72fr);
 		gap: clamp(1.2rem, 3vw, 3rem);
 		align-items: stretch;
-		transform-style: preserve-3d;
+		/* Keep the scrollable bookcase in its own hit-testing plane in Edge. */
+		transform-style: flat;
 	}
 
 	.scene-floor {
