@@ -5,6 +5,8 @@ pubDate: 2026-09-06
 category: '分类名称'
 tags: ['标签一', '标签二']
 draft: false
+# 可选：先把图片放入 src/assets，再取消下一行注释。
+# heroImage: '../../assets/your-image.jpg'
 ---
 
 在这里开始正文。
