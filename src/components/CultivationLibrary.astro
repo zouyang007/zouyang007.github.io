@@ -7,6 +7,7 @@ const names: Record<string, {name: string; note: string; tone: string}> = {
  '每日新闻早报': { name: '万界见闻', note: '四海风物，人间新事', tone: 'jade' },
  'AI新闻速递': { name: '天机秘录', note: '推演万象，窥见未来', tone: 'indigo' },
  'GitHub高分项目': { name: '百工造物', note: '奇巧之术，开源之器', tone: 'red' },
+ '每周总结': { name: '万界周志', note: '拾遗录事，收纳新知', tone: 'ochre' },
 };
 const categories = [...new Set(posts.map(post => post.data.category))];
 const ordered = [...Object.keys(names).filter(category => categories.includes(category)), ...categories.filter(category => !names[category])];
