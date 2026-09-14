@@ -33,11 +33,10 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('zh-CN', {year:'numer
   <div class="shelf-carousel" data-shelf-carousel aria-label="分类书架轮播" tabindex="0">
    <button class="shelf-arrow shelf-arrow-prev" type="button" data-shelf-prev disabled={shelves.length < 2} aria-label={`上一阁：${shelves.at(-1)?.name ?? ''}`}><b aria-hidden="true">‹</b></button>
    <div class="shelf-stage">
-    <p class="shelf-position"><span data-shelf-current-number>壹</span><i aria-hidden="true">／</i><span>{shelves.length} 阁</span><strong data-shelf-current-name>{shelves[0]?.name}</strong></p>
     <div class="shelf-gallery">{shelves.map((shelf, shelfIndex) => (
    <section class:list={['archive-cabinet', shelf.tone, shelfIndex === 0 && 'is-active-shelf']} id={shelf.id} aria-labelledby={`${shelf.id}-title`} data-category-shelf data-category={shelf.category} data-shelf-index={shelfIndex} data-shelf-name={shelf.name} hidden={shelfIndex !== 0}>
     <header class="cabinet-heading"><span class="cabinet-number">{['壹','贰','叁','肆'][shelfIndex] ?? String(shelfIndex + 1)}</span><div><h3 id={`${shelf.id}-title`}>{shelf.name}</h3><p>{shelf.category} · {shelf.note}</p></div><span class="volume-count">{shelf.posts.length} 卷</span></header>
-    <div class="shelf-books">{shelf.posts.map((post, index) => (
+    <div class="shelf-books"><span class="shelf-rails" aria-hidden="true"></span>{shelf.posts.map((post, index) => (
      <div class="book-slot">
       <a class="ancient-book" href={`/posts/${post.id}/`} data-library-book data-title={post.data.title} data-description={post.data.description} data-category={post.data.category} data-collection={shelf.name} data-keywords={post.data.tags.join(' · ') || post.data.category} data-date={formatDate(post.data.pubDate)} aria-label={`展卷：${post.data.title}`} aria-describedby="book-keyword-tooltip" style={`--volume-height:${146 + (index % 4) * 8}px;--lean:${(index % 3 - 1) * 1.5}deg;--book-order:${index}`}>
        <span class="volume-visual"><span class="thread-binding" aria-hidden="true">┄<br/>┄<br/>┄</span><span class="volume-label">{post.data.title.slice(0, 16)}{post.data.title.length > 16 ? '…' : ''}</span><span class="volume-index">{String(index + 1).padStart(2, '0')}</span></span>
@@ -125,7 +124,6 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('zh-CN', {year:'numer
   const previousShelfButton = root.querySelector<HTMLButtonElement>('[data-shelf-prev]');
   const nextShelfButton = root.querySelector<HTMLButtonElement>('[data-shelf-next]');
   const shelfAnnouncer = root.querySelector<HTMLElement>('[data-shelf-announcer]');
-  const shelfNumbers = ['壹','贰','叁','肆','伍','陆','柒','捌','玖'];
   let activeShelfIndex = 0;
   let shelfAnimationTimer = 0;
   let opening = false;
@@ -164,10 +162,6 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('zh-CN', {year:'numer
    const currentName = activeShelf.dataset.shelfName ?? '';
    const previousName = categoryShelves[previousIndex].dataset.shelfName ?? '';
    const followingName = categoryShelves[followingIndex].dataset.shelfName ?? '';
-   const currentNumber = root.querySelector<HTMLElement>('[data-shelf-current-number]');
-   const currentNameNode = root.querySelector<HTMLElement>('[data-shelf-current-name]');
-   if (currentNumber) currentNumber.textContent = shelfNumbers[nextIndex] ?? String(nextIndex + 1);
-   if (currentNameNode) currentNameNode.textContent = currentName;
    previousShelfButton?.setAttribute('aria-label', `上一阁：${previousName}`);
    nextShelfButton?.setAttribute('aria-label', `下一阁：${followingName}`);
    activeShelfIndex = nextIndex;
@@ -343,24 +337,22 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('zh-CN', {year:'numer
  .gate-threshold { position:absolute; z-index:7; left:0; right:0; bottom:0; height:8.4%; border:clamp(3px,.4vw,6px) solid #120b07; background-color:#3b2617; background-image:linear-gradient(180deg,transparent,#0008),url('/images/library/archive-door-v1.png'); background-repeat:no-repeat; background-size:100% auto; background-position:center bottom; box-shadow:inset 0 2px #d0a16a3d,0 -7px 17px #000b,0 13px 22px #000e; transform:translateZ(30px); }
  .gate-threshold::before { content:''; position:absolute; z-index:2; left:-.5%; right:-.5%; top:-28%; height:34%; border:2px solid #1b110a; background:url('/images/library/archive-door-v1.png') center 91%/100% auto no-repeat; filter:brightness(.72); transform-origin:bottom; transform:perspective(440px) rotateX(58deg); box-shadow:inset 0 2px #d8ad7247,0 -4px 10px #0009; }
  .gate-threshold::after { content:''; position:absolute; left:6%; right:6%; bottom:-19%; height:20%; background:#000b; filter:blur(8px); transform:translateZ(-8px); }
- .library-interior { min-height:80vh; max-width:1400px; margin:auto; padding:3rem 2rem 5rem; }
- .interior-heading { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:2rem; }
+ .library-interior { position:relative; isolation:isolate; min-height:calc(100svh - var(--ui-header-height)); max-width:1400px; margin:auto; padding:3rem 2rem 5rem; }
+ .library-interior::before { content:''; position:absolute; z-index:-3; left:50%; top:0; bottom:0; width:100vw; transform:translateX(-50%); border-top:1px solid #8f74434d; border-bottom:1px solid #8f744338; background-color:#0b120f; background-image:linear-gradient(90deg,#04100bbd 0,transparent 18%,transparent 82%,#04100bbd 100%),linear-gradient(180deg,#07100dd6 0,transparent 19%,transparent 74%,#07100de3 100%),url('/images/library/archive-hall-bg-v1.png'); background-position:center,center,center center; background-size:auto,auto,cover; background-repeat:no-repeat; box-shadow:inset 0 20px 55px #0008,inset 0 -50px 80px #000a; }
+ .library-interior::after { content:''; position:absolute; z-index:-2; left:50%; top:0; bottom:0; width:100vw; transform:translateX(-50%); pointer-events:none; background:radial-gradient(ellipse at center 47%,transparent 0 32%,#06100b24 63%,#020604a3 100%),linear-gradient(180deg,transparent 70%,#c4a15e0a 84%,transparent 100%); }
+ .interior-heading { display:flex; align-items:center; justify-content:space-between; gap:1rem; max-width:1040px; margin:0 auto 1.25rem; padding:1rem 1.25rem; border:1px solid #a8874f47; background:#07100cca; box-shadow:inset 0 0 20px #0008,0 12px 26px #0005; backdrop-filter:blur(5px); }
  .eyebrow { margin:0 0 .65rem; color:var(--gold); font-size:.85rem; letter-spacing:.25em; }
  .interior-heading h2 { margin:0 0 .75rem; font-size:clamp(2.3rem,5vw,3.8rem); color:var(--text); font-weight:500; letter-spacing:.15em; }
  .interior-heading div > p:last-child { color:#a6b4a8; margin:0; font-size:1rem; }
  .quiet-button { padding:.6rem 1rem; border:1px solid #a98d584d; color:#d5bd90; text-decoration:none; white-space:nowrap; font-size:.9rem; }
- .collection-nav { display:flex; flex-wrap:wrap; border-top:1px solid #a98d5840; border-bottom:1px solid #a98d5840; margin-bottom:2.5rem; }
+ .collection-nav { display:flex; flex-wrap:wrap; max-width:1040px; margin:0 auto 2.5rem; border:3px ridge #4b3521; background-color:#130e09dc; background-image:linear-gradient(180deg,#8c642a18,#0008),url('/images/library/archive-walnut-v1.png'); background-size:auto,390px auto; box-shadow:inset 0 2px #be955938,0 14px 30px #0007; backdrop-filter:blur(4px); }
  .collection-nav a { flex:1 1 150px; display:flex; align-items:center; justify-content:center; gap:1rem; padding:1rem; color:#e0ccb0; text-decoration:none; }
  .collection-nav a:hover { background:#d7b78012; }
  .collection-nav a[aria-current='true'] { color:#f2ddb5; background:#d7b78016; box-shadow:inset 0 -2px #c5a367; }
  .collection-nav small { color:#92a090; font-size:.85rem; }
- .shelf-carousel { display:grid; grid-template-columns:48px minmax(0,900px) 48px; align-items:center; justify-content:center; gap:clamp(.45rem,1.2vw,1rem); scroll-margin-top:calc(var(--ui-header-height) + 1rem); }
- .shelf-stage { min-width:0; }
- .shelf-position { display:flex; align-items:center; justify-content:center; gap:.65rem; min-height:42px; margin:0 0 1rem; color:#9e8c70; font-size:.78rem; letter-spacing:.14em; }
- .shelf-position > span:first-child { color:#d7b780; font-size:1.15rem; }
- .shelf-position i { color:#665a47; font-style:normal; }
- .shelf-position strong { margin-left:.45rem; color:#e1c99e; font-size:.92rem; font-weight:500; letter-spacing:.18em; }
- .shelf-arrow { display:flex; align-items:center; justify-content:center; width:44px; height:54px; padding:0; border:1px solid #c6a66942; border-radius:999px; color:#ccb68d; background:#0b15113b; box-shadow:inset 0 0 10px #d4b2700a,0 7px 18px #0003; backdrop-filter:blur(3px); opacity:.7; cursor:pointer; transition:transform 180ms ease,opacity 180ms ease,background 180ms ease,border-color 180ms ease; }
+ .shelf-carousel { position:relative; isolation:isolate; display:grid; grid-template-columns:48px minmax(0,900px) 48px; align-items:center; justify-content:center; gap:clamp(.45rem,1.2vw,1rem); scroll-margin-top:calc(var(--ui-header-height) + 1rem); }
+ .shelf-stage { position:relative; z-index:2; min-width:0; }
+ .shelf-arrow { position:relative; z-index:3; display:flex; align-items:center; justify-content:center; width:44px; height:54px; padding:0; border:1px solid #c6a66942; border-radius:999px; color:#ccb68d; background:#0b15113b; box-shadow:inset 0 0 10px #d4b2700a,0 7px 18px #0003; backdrop-filter:blur(3px); opacity:.7; cursor:pointer; transition:transform 180ms ease,opacity 180ms ease,background 180ms ease,border-color 180ms ease; }
  .shelf-arrow b { color:#e2c58f; font-family:serif; font-size:2.15rem; font-weight:400; line-height:.8; transform:translateY(-1px); }
  .shelf-arrow:hover,.shelf-arrow:focus-visible { border-color:#d7b7809e; background:#18231d82; opacity:1; outline:2px solid #d7b78080; outline-offset:3px; }
  .shelf-arrow-prev:hover { transform:translateX(-4px); }
@@ -369,23 +361,26 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('zh-CN', {year:'numer
  .shelf-gallery { display:block; min-width:0; }
  .archive-cabinet.is-switching-next { animation:shelf-from-right 420ms cubic-bezier(.2,.72,.2,1) both; }
  .archive-cabinet.is-switching-previous { animation:shelf-from-left 420ms cubic-bezier(.2,.72,.2,1) both; }
- .archive-cabinet { position:relative; isolation:isolate; scroll-margin-top:calc(var(--ui-header-height) + 1.5rem); padding:10px 1.15rem 8px; border:clamp(7px,.65vw,11px) ridge #3b2819; background-color:#1a130d; background-image:linear-gradient(90deg,#080604d6,transparent 18% 77%,#070503d9),linear-gradient(180deg,#0006,transparent 23% 74%,#0009),url('/images/library/archive-walnut-v1.png'); background-size:auto,auto,420px auto; box-shadow:0 28px 46px #0008,0 6px 0 #0b0705,inset 3px 0 #c0935730,inset -4px 0 #000a,inset 0 0 34px #000b; --cover:#60502e; --cover-light:#806b3e; }
- .archive-cabinet::before,.archive-cabinet::after { content:''; position:absolute; z-index:3; left:-13px; right:-13px; pointer-events:none; background-image:linear-gradient(180deg,#9b713324,#000a),url('/images/library/archive-walnut-v1.png'); background-size:auto,360px auto; border:2px solid #170e09; box-shadow:inset 0 2px #bd915435,0 8px 14px #000a; }
- .archive-cabinet::before { top:-14px; height:18px; transform:perspective(300px) rotateX(-22deg); transform-origin:bottom; }
- .archive-cabinet::after { bottom:-15px; height:20px; transform:perspective(300px) rotateX(18deg); transform-origin:top; filter:brightness(.74); }
+ .archive-cabinet { position:relative; isolation:isolate; display:flex; flex-direction:column; width:100%; scroll-margin-top:calc(var(--ui-header-height) + 1.5rem); padding:10px 1.15rem 8px; border:clamp(7px,.65vw,11px) ridge #3b2819; background-color:#1a130d; background-image:linear-gradient(90deg,#080604d6,transparent 18% 77%,#070503d9),linear-gradient(180deg,#0006,transparent 23% 74%,#0009),url('/images/library/archive-walnut-v1.png'); background-size:auto,auto,420px auto; box-shadow:0 28px 46px #0008,0 6px 0 #0b0705,inset 3px 0 #c0935730,inset -4px 0 #000a,inset 0 0 34px #000b; --cover:#60502e; --cover-light:#806b3e; }
+ .archive-cabinet::before,.archive-cabinet::after { content:''; position:absolute; z-index:5; left:-18px; right:-18px; pointer-events:none; background-image:linear-gradient(180deg,#9b713324,#000a),url('/images/library/archive-walnut-v1.png'); background-size:auto,360px auto; border:3px ridge #28180f; box-shadow:inset 0 2px #bd915435,0 8px 14px #000a; }
+ .archive-cabinet::before { top:-19px; height:24px; clip-path:polygon(2% 0,98% 0,100% 100%,0 100%); transform:perspective(300px) rotateX(-18deg); transform-origin:bottom; }
+ .archive-cabinet::after { bottom:-24px; height:30px; clip-path:polygon(0 0,100% 0,97.5% 100%,2.5% 100%); transform:perspective(300px) rotateX(18deg); transform-origin:top; filter:brightness(.74); }
  .archive-cabinet.jade { --cover:#334d3f; --cover-light:#56705a; }
  .archive-cabinet.indigo { --cover:#34434d; --cover-light:#526877; }
  .archive-cabinet.red { --cover:#60362c; --cover-light:#7b4c3a; }
- .cabinet-heading { position:relative; z-index:1; display:flex; align-items:center; gap:.85rem; min-height:112px; padding:1.25rem .8rem; border:3px ridge #4a321f; border-bottom-width:9px; background-image:linear-gradient(90deg,#0008,transparent 22% 78%,#0009),linear-gradient(180deg,#81592d18,#0008),url('/images/library/archive-walnut-v1.png'); background-size:auto,auto,390px auto; background-position:center; box-shadow:inset 0 2px #b88c5230,inset 0 -12px 18px #0009,0 9px 14px #0008; }
+ .cabinet-heading { position:relative; z-index:3; display:flex; align-items:center; gap:.85rem; min-height:104px; padding:1.2rem 1.35rem; border:5px ridge #4a321f; border-bottom-width:13px; background-image:linear-gradient(90deg,#0008,transparent 22% 78%,#0009),linear-gradient(180deg,#81592d18,#0008),url('/images/library/archive-walnut-v1.png'); background-size:auto,auto,390px auto; background-position:center; box-shadow:inset 0 2px #b88c5230,inset 0 -12px 18px #0009,0 9px 14px #0008; }
  .cabinet-heading::after { content:'◆'; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); width:58%; height:12px; overflow:hidden; color:#9e7846; background:#20150e; border:1px solid #654725; text-align:center; font-size:8px; line-height:10px; letter-spacing:.9em; padding-left:.9em; box-shadow:inset 0 0 7px #000c; }
  .cabinet-number { padding:.28rem .58rem; border:2px ridge #8e6b3f66; color:#c0a16b; background:#120d09a8; box-shadow:inset 0 0 10px #000a,0 3px 7px #0007; font-size:1.35rem; }
  .cabinet-heading h3 { margin:0 0 .3rem; font-size:1.55rem; letter-spacing:.15em; color:#eedab6; font-weight:500; }
  .cabinet-heading p { margin:0; color:#b5a58b; font-size:.8rem; }
  .volume-count { margin-left:auto; white-space:nowrap; color:#a89170; font-size:.8rem; }
- .shelf-books { position:relative; z-index:1; isolation:isolate; display:grid; grid-template-columns:repeat(auto-fill,minmax(65px,1fr)); padding:12px .4rem 0; border-left:2px solid #2b1c12; border-right:2px solid #160e09; background-image:linear-gradient(90deg,#000c,transparent 14% 84%,#000d),linear-gradient(180deg,#030302cc,#18120d73 38%,#050403cf),url('/images/library/archive-walnut-v1.png'); background-size:auto,auto,330px auto; box-shadow:inset 16px 0 22px #0008,inset -16px 0 22px #0008,inset 0 12px 18px #000b; }
- .shelf-books::before { content:''; position:absolute; z-index:2; inset:0; pointer-events:none; background:linear-gradient(115deg,#c6944c0b,transparent 24% 72%,#0005); box-shadow:inset 0 0 28px #0008; }
+ .shelf-books { position:relative; z-index:1; isolation:isolate; display:grid; flex:0 0 444px; grid-template-columns:repeat(auto-fill,minmax(65px,1fr)); grid-auto-rows:216px; align-content:start; height:444px; min-height:444px; padding:12px 1rem 0; border-left:clamp(12px,1vw,17px) ridge #3b2819; border-right:clamp(12px,1vw,17px) ridge #3b2819; background-color:#100b07; background-image:linear-gradient(90deg,#000b,transparent 9% 91%,#000c),repeating-linear-gradient(180deg,transparent 0 194px,#9b6c352b 194px,#7a522d 198px,#25170e 204px,#080503 216px),linear-gradient(180deg,#030302d9,#18120d7d 38%,#050403e3),url('/images/library/archive-walnut-v1.png'); background-size:auto,auto,auto,330px auto; box-shadow:inset 18px 0 22px #000b,inset -18px 0 22px #000b,inset 0 12px 18px #000d; }
+ .shelf-books::before { content:''; position:absolute; z-index:0; inset:0; pointer-events:none; background:linear-gradient(90deg,transparent 0 calc(33.333% - 5px),#20130c calc(33.333% - 5px) calc(33.333% + 5px),transparent calc(33.333% + 5px) calc(66.666% - 5px),#20130c calc(66.666% - 5px) calc(66.666% + 5px),transparent calc(66.666% + 5px)),linear-gradient(115deg,#c6944c0b,transparent 24% 72%,#0005); box-shadow:inset 0 0 28px #0009; }
+ .shelf-rails { position:absolute; z-index:4; inset:0; pointer-events:none; }
+ .shelf-rails::before,.shelf-rails::after { content:''; position:absolute; left:-12px; right:-12px; height:18px; border-top:2px solid #9a6d3b; border-bottom:3px solid #100a06; background-color:#2a1b11; background-image:linear-gradient(180deg,#b07b3d33,#000b),url('/images/library/archive-walnut-v1.png'); background-size:auto,260px auto; box-shadow:inset 0 2px #cfa46847,inset 0 -3px #080503b8,0 8px 11px #000d; }
+ .shelf-rails::before { top:198px; }
+ .shelf-rails::after { bottom:0; }
  .book-slot { position:relative; z-index:1; display:flex; align-items:end; justify-content:center; height:216px; padding:22px 6px 20px; box-shadow:inset 0 -11px 13px #000b; }
- .book-slot::after { content:''; position:absolute; z-index:2; left:-2px; right:-2px; bottom:0; height:16px; border-top:2px solid #76512c; border-bottom:2px solid #100a06; background-image:linear-gradient(180deg,#9b6c351f,#000a),url('/images/library/archive-walnut-v1.png'); background-size:auto,250px auto; box-shadow:inset 0 2px #c79c6040,0 7px 9px #000c; pointer-events:none; }
  .ancient-book { position:relative; z-index:3; display:block; width:48px; height:var(--volume-height); color:#27251d; text-decoration:none; touch-action:manipulation; }
  /* The link stays flat; only its non-interactive cover moves, preserving Edge hit testing. */
  .volume-visual { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; overflow:hidden; border:1px solid #b59c5c70; border-radius:2px 5px 4px 2px; background-image:repeating-linear-gradient(0deg,#fff0 0 4px,#0000000c 5px 6px),linear-gradient(90deg,#11110d 0 9%,var(--cover) 10%,var(--cover-light) 57%,var(--cover)); box-shadow:5px 5px 7px #000b,inset 2px 0 #d4bd7642,inset -5px 0 5px #0007,inset 0 -7px 8px #0004; transform:rotate(var(--lean)); transform-origin:bottom; transition:transform 200ms,filter 200ms; pointer-events:none; }
@@ -398,7 +393,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('zh-CN', {year:'numer
  .volume-index { position:absolute; bottom:2px; right:4px; color:#dccba6; font-size:10px; }
  .ancient-book:hover .volume-visual,.ancient-book:focus-visible .volume-visual { transform:translateY(-10px) rotate(0); filter:brightness(1.2); }
  .ancient-book:focus-visible { outline:2px solid var(--gold); outline-offset:6px; }
- .cabinet-footer { position:relative; z-index:1; display:flex; justify-content:space-between; gap:1rem; padding:1.25rem .8rem 1.15rem; border:3px ridge #3e2b1c; border-top-width:8px; color:#bda678; background-image:linear-gradient(180deg,#0002,#000a),url('/images/library/archive-walnut-v1.png'); background-size:auto,390px auto; box-shadow:inset 0 3px #aa814c2b,inset 0 -10px 16px #0008; font-size:.8rem; }
+ .cabinet-footer { position:relative; z-index:3; display:flex; justify-content:space-between; gap:1rem; padding:1.15rem 1.35rem; border:5px ridge #3e2b1c; border-top-width:13px; color:#bda678; background-image:linear-gradient(180deg,#0002,#000a),url('/images/library/archive-walnut-v1.png'); background-size:auto,390px auto; box-shadow:inset 0 3px #aa814c2b,inset 0 -10px 16px #0008; font-size:.8rem; }
  .cabinet-footer a { color:#cbbb9b; text-underline-offset:4px; }
  .keyword-tooltip { position:fixed; z-index:100; width:min(320px,calc(100vw - 24px)); padding:1rem; background:#18221ef5; border:1px solid #bba06a80; color:#eee2c9; box-shadow:0 10px 35px #0008; pointer-events:none; }
  .keyword-tooltip strong { display:block; font-size:1rem; line-height:1.6; }
@@ -438,6 +433,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('zh-CN', {year:'numer
  @media(max-width:700px) {
   .shelf-carousel { grid-template-columns:1fr 1fr; align-items:stretch; gap:1rem; }
   .shelf-stage { grid-column:1 / -1; grid-row:1; }
+  .shelf-books { flex-basis:auto; height:auto; min-height:444px; }
   .shelf-arrow { grid-row:2; width:42px; height:42px; }
   .shelf-arrow-prev { grid-column:1; justify-self:end; }
   .shelf-arrow-next { grid-column:2; justify-self:start; }
